@@ -1,0 +1,88 @@
+<div class=" conteiner-fluid">
+    <nav class="navbar navbar-expand-lg navbar navbar-light bg-light fixed-top">
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> -->
+        <a class="navbar-brand" href="#">
+            <img src="/app/imagenes/descarga.jpg" width="40" height="40" class="d-inline-block align-top" alt=""> SiGHySe </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#barraMenu" aria-controls="barraMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- <div class="collapse navbar-collapse" id="barraMenu" [ngbCollapse]="navbarOpen"> -->
+
+        <!-- 1 -->
+        <div class="collapse navbar-collapse" id="barraMenu">
+            <div *ngFor="let itemMenu of this.menuService.menu; let i = index">
+
+                <ul class="navbar-nav mr-auto list-inline">
+                    <!-- <li class="nav-item"> -->
+                    <li class="nav-item dropdown">
+
+                        <div *ngIf="itemMenu.Hijos.length> 0 ; else padre">
+
+                            <!-- 2 -->
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown i" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 {{itemMenu.Datos[0].Nombre}}  
+                            </a>
+
+                            <!-- 3 -->
+                            <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown i">
+                                <div *ngFor="let xitem of itemMenu.Hijos; let j=index">
+                                    <div class="d-md-flex small">
+                                        <div *ngIf="xitem.Hijos.length> 0 ; else padreDos">
+                                            <div class="mx-4">
+
+                                                <!-- <div class="dropdown-header alert alert-primary"> {{xitem.Datos[0].Nombre}} -- </div> -->
+                                                <h6>{{xitem.Datos[0].Nombre}}</h6>
+                                                <div class="dropdown-divider"></div>
+                                                <div *ngFor="let zitem of xitem.Hijos">
+                                                    <!-- <a routerLink='/{{zitem.Datos[0].Accion}}'>{{zitem.Datos[0].Nombre}} </a> -->
+                                                    <p><a class="dropdown-item bg-light" routerLink='/{{zitem.Datos[0].Accion}}'>{{zitem.Datos[0].Nombre}}  </a></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ng-template #padreDos>
+                                            <div class="mx-4">
+                                                <h6>{{xitem.Datos[0].Nombre}}</h6>
+                                                <div class="dropdown-divider"></div>
+                                                <p> <a class="dropdown-item bg-light" routerLink='/{{xitem.Datos[0].Accion}}' ngbTooltip='{{xitem.Datos[0].Descripcion}}'>{{xitem.Datos[0].Nombre}}</a></p>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <ng-template #padre>
+                            <!--cuando no tiene hijos, ej. inicio-->
+                            <a class="nav-link" routerLink='/{{itemMenu.Datos[0].Accion}}' ngbTooltip='{{itemMenu.Datos[0].Descripcion}}'>{{itemMenu.Datos[0].Nombre}} </a>
+                        </ng-template>
+                        <!-- <a class="nav-link">
+                            {{itemMenu.Datos[0].Nombre}}
+                        </a> -->
+                        <!-- <li class="nav-item active">
+                            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                        </li> -->
+
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="d-inline-block  col text-right ">
+                <select #edificio (change)="this.cambiarEdificio(edificio.value)" class=" mdb-select md-form bg-light" searchable="Busque su Edificio">
+                   
+                    <option *ngFor="let edif of menuService.edificios" [value]="edif.EdificioId">
+                      {{edif.Nombre}} </option>
+                </select>
+            </div>
+
+            <app-usuario></app-usuario>
+            <!-- <span class="navbar-text text-primary">
+                    +54 11 43106419
+            </span> -->
+        </div>
+    </nav>
+</div>
+

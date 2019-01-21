@@ -1,0 +1,39 @@
+<div *ngIf="regionService.datosVisible">  
+    <h6 class="text-center bg-secondary text-white">  Datos del rubro </h6>
+  <form class="emp-form" #regionForm="ngForm" (ngSubmit)="onSubmit(regionForm)">
+
+    <div class="form-row">
+      <div class="form-group col-md-2">
+         <label>Nombre </label>
+        <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="regionService.instancia.Nombre" placeholder="Nombre de la Región"
+          required>
+        <div class="validation-error" *ngIf="Nombre.invalid && Nombre.touched">El campo es Requerido.</div>
+      </div>
+      <div class="form-group col-md-2">
+          <label>Orden </label>
+         <input class="form-control form-control-sm" name="Orden" #Orden="ngModel" [(ngModel)]="regionService.instancia.Orden" placeholder="Orden"
+           >
+       </div>
+ 
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+          <label>Notas </label>
+          <input class="form-control  form-control-sm" name="Nota" #Nombre="ngModel" [(ngModel)]="regionService.instancia.Nombre" placeholder="Notas" >
+        
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <button [disabled]="!regionForm.valid" type="submit" class="btn btn-sm btn-lg btn-block btn-info">
+          <i class="fa fa-floppy-o"></i> Grabar</button>
+      </div>
+      <div class="form-group col-md-4">
+        <button type="button" class="btn btn-sm btn-lg btn-block btn-secondary" (click)="resetForm(regionForm)">
+          <i class="fa fa-repeat"></i> Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>

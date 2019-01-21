@@ -1,0 +1,125 @@
+
+<div *ngIf="usuService.datosVisible">  
+    <h6 class="text-center bg-secondary text-white">  Datos del Usuario </h6>
+    <form class="emp-form" #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm)">
+        <input type="hidden" name="UsuarioId" #UsuarioId="ngModel" [(ngModel)]="usuService.instancia.UsuarioId">
+        <input type="hidden" name="FechaAlta" #FechaAlta="ngModel" [(ngModel)]="usuService.instancia.FechaAlta">
+        <input type="hidden" name="OperFecha" #OperFecha="ngModel" [(ngModel)]="usuService.instancia.OperFecha">
+        <input type="hidden" name="OperUsuarioId" #OperUsuarioId="ngModel" [(ngModel)]="usuService.instancia.OperUsuarioId">
+
+        <div class="form-row">
+
+            <div class="form-group col-md-7">
+                <label for="Nombre"> Nombre</label>
+                <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="usuService.instancia.Nombre" placeholder="Nombre" o required>
+                <div class="validation-error" *ngIf="Nombre.invalid && Nombre.touched">El campo es Requerido.</div>
+            </div>
+            <div class="form-group col-md-2">
+                    <label for="DNI"> DNI</label>
+                    <input class="form-control form-control-sm" name="DNI" #DNI="ngModel" [(ngModel)]="usuService.instancia.DNI" placeholder="DNI">
+            </div>
+            <div class="form-group col-md-2">
+                    <label for="CUIL"> CUIL</label>
+                    <input class="form-control form-control-sm" name="CUIL" #CUIL="ngModel" [(ngModel)]="usuService.instancia.CUIL" placeholder="CUIL">
+            </div>
+            <div class="form-group col-md-1">
+
+          <label for="Estado"> Activo</label>
+            <label class="chk-container"> 
+                    <input type="checkbox" name="Estado" #Estado="ngModel" [(ngModel)]="usuService.instancia.Estado">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="UserIdRed"> Usuario de Red</label>
+                <input class="form-control form-control-sm" name="UserIdRed" #UserIdRed="ngModel" [(ngModel)]="usuService.instancia.UserIdRed" placeholder="Usuario de Red" required>
+                <div class="validation-error" *ngIf="UserIdRed.invalid && UserIdRed.touched">El campo es Requerido.</div>
+            </div>
+            <div class="form-group col-md-4">
+                    <label for="UserIdIdentidades"> Usuario Identidades</label>
+                    <input class="form-control form-control-sm" name="UserIdIdentidades" #UserIdIdentidades="ngModel" [(ngModel)]="usuService.instancia.UserIdIdentidades" placeholder="Usuario Identidades" required>
+
+                <div class="validation-error" *ngIf="UserIdIdentidades.invalid && UserIdIdentidades.touched">El campo es Requerido.</div>
+            </div>
+            <div class="form-group col-md-4">
+                    <label for="UserIdExterno"> Usuario Externo</label>
+                    <input class="form-control form-control-sm" name="UserIdExterno" #UserIdExterno="ngModel" [(ngModel)]="usuService.instancia.UserIdExterno" placeholder="Usuario Externo" required>
+                <div class="validation-error" *ngIf="UserIdIdentidades.invalid && UserIdIdentidades.touched">El campo es Requerido.</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-4">
+                    <label for="Pcia"> Edificio</label>
+                    <select class="form-control form-control-sm" name="Edificio" #Pcia="ngModel" [(ngModel)]="usuService.instancia.EdificioId" aria-placeholder="Edificio" >
+
+            <option *ngFor="let edificio of  edificios" [value]="edificio.EdificioId">
+            {{edificio.Nombre}}</option>
+        </select>
+            </div>
+            <div class="form-group col-md-4">
+                    <label for="Dependencia"> Dependencia</label>
+                    <input class="form-control form-control-sm" name="Dependencia" #Dependencia="ngModel" [(ngModel)]="usuService.instancia.Dependencia" placeholder="Dependencia">
+            </div>
+            <div class="form-group col-md-4">
+                    <label for="Ubicacion">Ubicación</label>
+                    <input class="form-control form-control-sm" name="Ubicacion" #Ubicacion="ngModel" [(ngModel)]="usuService.instancia.Ubicacion" placeholder="Ubicacion">
+                </div>
+        </div>
+
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="Mail"> Mail</label>
+                    <input class="form-control form-control-sm" name="Mail" type="email" #Mail="ngModel" [(ngModel)]="usuService.instancia.Mail" placeholder="Mail">
+            </div>
+
+            <div class="form-group col-md-3">
+                    <label for="TelefonoInterno"> Interno</label>
+                    <input class="form-control form-control-sm" name="TelefonoInterno" #TelefonoInterno="ngModel" [(ngModel)]="usuService.instancia.TelefonoInterno" placeholder="Telefono Interno">
+            </div>
+            <div class="form-group col-md-3">
+                    <label for="TelefonoCelular"> Telefono Celular</label>
+                    <input class="form-control form-control-sm" name="TelefonoCelular" #TelefonoCelular="ngModel" [(ngModel)]="usuService.instancia.TelefonoCelular" placeholder="Telefono Celular">
+            </div>
+        </div>
+                        
+        <div class="form-row">
+
+            <div class="form-group col-md-3">
+                    <label for="Cargo"> Cargo</label>
+                    <input class="form-control form-control-sm" name="Cargo" #Cargo="ngModel" [(ngModel)]="usuService.instancia.Cargo" placeholder="Cargo">
+            </div>
+            <div class="form-group col-md-3">
+                    <label for="Horario"> Horario</label>
+                    <input class="form-control form-control-sm" name="Horario" #Horario="ngModel" [(ngModel)]="usuService.instancia.Horario" placeholder="Horario">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="Notas"> Notas</label>
+                    <input class="form-control form-control-sm" name="Notas" #Notas="ngModel" [(ngModel)]="usuService.instancia.Notas" placeholder="Nota">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <button [disabled]="!usuarioForm.valid" type="submit" class="btn btn-sm btn-block btn-info">
+            <i class="fa fa-floppy-o"></i> Grabar</button>
+            </div>
+            <div class="form-group col-md-4">
+                <button type="button" class="btn btn-sm btn-block btn-secondary" (click)="resetForm(UsuarioForm)">
+            <i class="fa fa-repeat"></i> Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
+

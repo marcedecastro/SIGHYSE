@@ -1,0 +1,150 @@
+
+<div *ngIf="matService.datosVisible">  
+  <h6 class="text-center bg-secondary text-white">  Datos del matafuego </h6>
+  
+  <form class="emp-form" #matafuegoForm="ngForm" (ngSubmit)="onSubmit(matafuegoForm)">
+
+    <div class="accordion md-accordion" id="Acordion" aria-multiselectable="true" >
+
+
+
+        <div  class="col-md-12 btn  btn-outline-dark btn-sm" data-toggle="collapse"   role="button" data-target="#DatosTecnicos" aria-expanded="true" aria-controls="DatosTecnicos"
+        Collapsible (click)="showFirst=!showFirst"> Datos tecnicos
+        <i class="fa fa-angle-down rotate-icon pull-right" *ngIf="showFirst"></i><i class="fa fa-angle-up rotate-icon pull-right" *ngIf="!showFirst"></i>
+        </div>
+
+        <div id="DatosTecnicos" class="collapse show form-row" >  
+        
+          <div class="form-group col-md-4">
+              <label for="Tipo">Tipo de Matafuego </label>
+              <select class="form-control" name="Tipo" #Tipo="ngModel" [(ngModel)]="matService.instancia.Tipo" aria-placeholder="tipo de Matafuego"
+                required>
+                <option *ngFor="let xtipo of matService.tipos" [value]="xtipo.Tipo"> {{xtipo.Descripcion}}</option>
+              </select>
+          </div>
+        
+          <div class="form-group col-md-4">
+            <label>Tipo de Carga </label>
+            <select class="form-control" name="Carga" #Tipo="ngModel" [(ngModel)]="matService.instancia.Carga" aria-placeholder="tipo de Matafuego"
+                required>
+              <option *ngFor="let xCarga of matService.cargas" [value]="xCarga.Carga"> {{xCarga.Descripcion}}</option>
+              </select> 
+          </div>
+        
+          <div class="form-group col-md-4">
+            <label>Presión </label>
+            <select class="form-control" name="Presion" #Tipo="ngModel" [(ngModel)]="matService.instancia.Presion" aria-placeholder="Presion"
+              required>
+              <option *ngFor="let xPresion of matService.presiones" [value]="xPresion.Presion">
+                {{xPresion.Descripcion}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+              <label>Número de Serie </label>
+              <input class="form-control  form-control-sm" name="NroSerie" #NroSerie="ngModel" [(ngModel)]="matService.instancia.NroSerie"
+                placeholder="Número de Serie"  required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="FechaFabricacion">Fecha de Fabricación</label>
+            <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaFabricacion" #FechaFabricacion="ngModel" [(ngModel)]="matService.instancia.FechaFabricacion"
+              placeholder="Fecha de Fabricación" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="Piso">Ubicación-Piso </label>
+          <input class="form-control  form-control-sm" name="Piso" #Piso="ngModel" [(ngModel)]="matService.instancia.Piso"
+            required>
+          </div> 
+          <div class="form-group col-md-4">
+              <label for="Puesto">Ubicación-Puesto </label>
+              <input class="form-control  form-control-sm" name="Puesto" #Piso="ngModel" [(ngModel)]="matService.instancia.Puesto"
+                required>
+          </div>         
+          <div class="form-group col-md-3">
+              <label>Inventario STEySS </label>
+              <input class="form-control  form-control-sm" name="InventarioMTEySS" #InventarioMTEySS="ngModel" [(ngModel)]="matService.instancia.InventarioMTEySS"
+                >
+          </div>
+          <div class="form-group col-md-3">
+            <label>Inventario Dto. Sguridad </label>
+            <input class="form-control  form-control-sm" name="InventarioSeguridad" #InventarioSeguridad="ngModel" [(ngModel)]="matService.instancia.InventarioSeguridad"
+              required >
+        </div>
+        <div class="form-group col-md-3">
+              <label for="InventarioOtro">Otro número de Inventario </label>
+              <input class="form-control  form-control-sm" name="InventarioOtro" #InventarioOtro="ngModel" [(ngModel)]="matService.instancia.InventarioOtro"
+                >
+          </div>   
+
+
+        </div> <!--Colapasable datos tecnicos-->
+
+
+        <div  class="col-md-12 btn  btn-outline-dark btn-sm"data-toggle="collapse"  role="button" data-target="#DatosVencimientos" aria-expanded="true" aria-controls="DatosVencimientos"
+        Collapsible (click)="showFirst2=!showFirst2"> Vencimientos
+        <i class="fa fa-angle-down rotate-icon pull-right" *ngIf="showFirst2"></i><i class="fa fa-angle-up rotate-icon pull-right" *ngIf="!showFirst2"></i>
+        </div>
+        <div id="DatosVencimientos" class="collapse show  form-row" >  
+
+            <div class="form-group col-md-6">
+                <label for="FechaRelevamiento">Fecha de Relevamiento</label>
+                <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaRelevamiento" #FechaRelevamiento="ngModel" [(ngModel)]="matService.instancia.FechaRelevamiento"
+                  placeholder="Fecha de Relevamiento" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="FechaVencimiento">Fecha de Vencimiento</label>
+                <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaVencimiento" #FechaVencimiento="ngModel" [(ngModel)]="matService.instancia.FechaVencimiento"
+                  placeholder="Fecha de Vencimiento" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="FechaRecarga">Fecha de Recarga</label>
+                <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaRecarga" #FechaRecarga="ngModel" [(ngModel)]="matService.instancia.FechaRecarga"
+                  placeholder="Fecha de Recarga" >
+            </div>
+            <div class="form-group col-md-6">
+                <label for="FechaPruebaHidraulica">Fecha de Prueba Hidraulica</label>
+                <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaPruebaHidraulica" #FechaPruebaHidraulica="ngModel" [(ngModel)]="matService.instancia.FechaPruebaHidraulica"
+                  placeholder="Fecha de Prueba Hiráulica" >
+            </div>
+        </div>
+
+
+
+          <div  class="col-md-12 btn  btn-outline-dark btn-sm"data-toggle="collapse" data-target="#DatosInspeccion" aria-expanded="true" aria-controls="DatosInspeccion"
+          Collapsible (click)="showFirst3=!showFirst3"> Organismo de Control
+          <i class="fa fa-angle-down rotate-icon pull-right" *ngIf="showFirst3"></i><i class="fa fa-angle-up rotate-icon pull-right" *ngIf="!showFirst3"></i>
+    </div>
+        <div id="DatosInspeccion" class="collapse show  form-row" >  
+            <div class="form-group col-md-12">
+                <label>Nombre/Razón Social </label>
+                <input class="form-control  form-control-sm" name="IntervinoNombre " #IntervinoNombre="ngModel" [(ngModel)]="matService.instancia.IntervinoNombre "
+                  placeholder="Nombre/Razón Social"  >
+            </div>
+    
+            <div class="form-group col-md-5">
+                <label for="IntervinoDNI">Número de Documento </label>
+                <input class="form-control  form-control-sm" name="IntervinoDNI" #IntervinoDNI="ngModel" [(ngModel)]="matService.instancia.IntervinoDNI"
+                  placeholder="DNI persona Fisica"  >
+            </div>
+            <div class="form-group col-md-5">
+                <label for="IntervinoCUIL">CUIL/CUIT </label>
+                <input class="form-control  form-control-sm" name="IntervinoCUIL" #IntervinoCUIL="ngModel" [(ngModel)]="matService.instancia.IntervinoCUIL"
+                placeholder="CUIL/CUIT"   >
+            </div>
+
+        </div>
+ 
+
+      </div> <!-- Acordion -->     
+
+      <div class="form-row">
+          <div class="form-group col-md-8 ">
+            <button [disabled]="!matafuegoForm.valid" type="submit" class="btn btn-sm btn-block btn-info">
+              <i class="fa fa-floppy-o"></i> Grabar</button>
+          </div>
+          <div class="form-group col-md-4">
+            <button type="button" class="btn btn-sm btn-block btn-secondary" (click)="resetForm(matafuegoForm)">
+              <i class="fa fa-repeat"></i> Cancelar</button>
+          </div>
+        </div>
+  </form>
+</div>

@@ -1,0 +1,70 @@
+<!--<table class="table table-sm table-hover">
+    <tr *ngFor="let Region of this.RegionService.Lista">
+      <td>{{Region.Nombre}} - {{Region.Direccion}}</td>
+      <td>{{Region.Telefono}}</td>
+      <td>
+        <a class="btn" (click)="showForEdit(Region)">
+          <i class="fa fa-pencil-square-o"></i>
+        </a>
+        <a class="btn text-danger" (click)="onDelete(Region)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </td>
+    </tr>
+  </table>
+-->
+<div *ngIf="regionService.listaVisible">  
+    <div class="row">  
+      <!--<div class="col-md-12"> <h6 class="text-center bg-secondary text-white"> Regions </h6> </div> -->
+      <div class="col-1 offset-md-10">
+        <a class="btn btn-outline-secondary btn-sm " (click)="showNew()">
+          <i class="fa fa-plus-circle "></i>  <span> Nueva Regiónn</span>
+        </a>
+      </div>
+    <div class="col-md-12">  
+      <div class="table-responsive" >
+        <table class="table table-sm  table-hover">
+          <thead>
+            <tr  > 
+              <th>  </th>   <th>  </th>
+              <!-- lista de titulos-->
+              <Th *ngFor="let titulo of regionService.titulos ; let i = index">{{titulo}}</Th>   
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Region of regionService.Lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+
+              <td > 
+                <a class="btn" (click)="showForEdit(Region)"> <i class="fa fa-pencil-square-o"></i> </a>
+              </td>
+              <td>
+              <a class="btn text-danger" (click)="onDelete(Region,template)"> <i class="fa fa-trash-o"></i> </a>
+              </td>
+              <!--  campos de la fila-->
+              <td *ngFor="let campo of regionService.campos"> {{Region[campo]}}</td>
+        
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+
+    <div class="modal-content">
+    <div class="modal-header">
+
+      <h4 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Region?</h4>
+    </div>
+    <div class="modal-body text-center">
+        <p> {{regionService.instancia.Nombre}}</p>
+
+      <button type="button" class="btn btn-default" (click)="confirm()" >Si</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    </div>
+  </div>
+
+
+</ng-template>

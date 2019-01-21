@@ -1,0 +1,49 @@
+<div  *ngIf="legajoService.documentoVisible">  
+  <h6 class="text-center bg-secondary text-white">  Datos del documento </h6>
+  <form class="form" #documentoForm="ngForm" (ngSubmit)="onSubmit(documentoForm)">
+
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="Titulo">Título</label>
+            <input class="form-control  form-control-sm" name="Titulo" #Titulo="ngModel" [(ngModel)]="legajoService.instancia.Titulo"
+              placeholder="Titulo" required>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="Detalle">Detalle</label>
+              <input class="form-control  form-control-sm" name="Detalle" #Detalle="ngModel" [(ngModel)]="legajoService.instancia.Detalle"
+                placeholder="Detalle"  required>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="FechaDesde">Fecha de Vigencia</label>
+              <input class="form-control  form-control-sm" type="text" bsDatepicker [bsConfig]="dpkConf" name="FechaDesde" #FechaDesde="ngModel" [(ngModel)]="legajoService.instancia.FechaDesde"
+                placeholder="Fecha" required>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="FechaHasta">Fecha de Vencimiento</label>
+              <input class="form-control  form-control-sm" placement="top" type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaHasta" #FechaHasta="ngModel" [(ngModel)]="legajoService.instancia.FechaHasta"
+                placeholder="Fecha deVigencia" required>
+          </div>
+          <div class="form-group col-md-6">
+              <label for="EmitidoPor">Emisor</label>
+              <input class="form-control  form-control-sm" name="EmitidoPor" #EmitidoPor="ngModel" [(ngModel)]="legajoService.instancia.EmitidoPor"
+                placeholder="Emisor"  required>
+          </div>
+          <div class="form-group col-md-12">
+              <label for="Nota"> Notas y Comentarios</label>
+              <input class="form-control  form-control-sm" name="Nota" #Nota="ngModel" [(ngModel)]="legajoService.instancia.Nota" placeholder="Nota">
+          </div>      
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <button [disabled]="!documentoForm.valid" type="submit" class="btn btn-sm btn-block btn-info">
+            <i class="fa fa-floppy-o"></i> Grabar</button>
+        </div>
+        <div class="form-group col-md-4">
+          <button type="button" class="btn btn-sm btn-block btn-secondary" (click)="resetForm(true)">
+            <i class="fa fa-repeat"></i> Cancelar</button>
+        </div>
+      </div>
+  </form>
+</div>
+ 

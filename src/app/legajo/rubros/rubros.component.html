@@ -1,0 +1,19 @@
+
+<div class="miAcordion" >  
+    <div id="accordion" *ngFor="let rubro of legajoService.legajo.Rubro ; let in = index"  >
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link fuenteChica" data-toggle="collapse" href="#collapse{{in}}">
+                        [{{in}}] {{rubro.RubroDefinicion[0].Descripcion}}
+                </a>
+            </div>
+            <div id="collapse{{in}}" class="collapse " data-parent="#accordion">
+                <div class="card-body">
+                    <div *ngFor="let tipoDoc of rubro.TipoDoc ; let ind = index">
+                        <a   class="list-group-item-action" (click)='legajoService.setDatosTipoDoc(tipoDoc,rubro.RubroDefinicion[0].Descripcion)' >{{tipoDoc.TipoDocDefinicion[0].Descripcion}}</a>                    
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+</div>

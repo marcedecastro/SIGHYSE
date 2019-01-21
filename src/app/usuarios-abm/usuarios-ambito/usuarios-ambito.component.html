@@ -1,0 +1,70 @@
+<div *ngIf="usuService.ambitoVisible">
+    <h6 class="text-center bg-secondary text-white">  Ambito del Usuario </h6>
+    <div class="form-row">
+            <p> Usaurio</p>
+            <div class="form-group col-md-4">
+               <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="usuService.instancia.Nombre"  disabled>
+            </div>
+            <p> Edificio</p>
+            <div class="form-group col-md-4">
+                    <input class="form-control form-control-sm" name="Edificio" #Nombre="ngModel" [(ngModel)]="usuService.instancia.EdificioNombre"  disabled>
+                </div>  
+    </div>
+
+
+  <form class="emp-form" #ambitosForm="ngForm" (ngSubmit)="onSubmit(ambitosForm)">
+ <!--       <div class="form-row">
+            <div class="form-col col-md-1  offset-md-8">
+                <div *ngIf="usuService.edificiosAmbito"> 
+                    <table>
+                        <tr *ngFor="let edificio of usuService.edificiosAmbito ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                            <td> {{edificio.Nombre}}</td>
+                        <td> <input type="checkbox" name="ambito" value="edificio.Nombre"> </td>
+                    </table>
+                
+                </div>
+            </div>
+        </div>
+    -->
+    <div class="form-row">  
+
+
+
+    </div>
+    <div class="form-row">
+        <div class="form-col col-md-5 edificios"> 
+            <div class="form-col col-md-12 tituloedificio"> Edificios </div>
+            <div *ngIf="usuService.edificios"> 
+                    <div  *ngFor="let edificio of usuService.edificios; let i = index" >
+                            <div class=" col-md-3 edificios-item d-flex flex-nowrap" (dblclick)="clickEdificio(edificio)">{{edificio.Nombre}}</div>
+                    </div>
+            </div>
+        </div>
+        <div class="form-col col-md-1 align-self-center ">  
+                <button type="button" class="btn btn-sm btn-block btn-secondary" (click)= "clickEdificiosTodos()" placement="top" ngbTooltip="Asignar Todos"> >></button>
+                <button type="button" class="btn btn-sm btn-block btn-secondary" (click)= "clickAmbitoTodos()"  placement="bottom" ngbTooltip="Desasignar Todos" > << </button>
+        </div>
+        <div class="form-col col-md-5  ambitos ">
+                            <div class="form-col col-md-12 tituloambitos"> Ambito del Usuario </div>
+                            <div *ngIf="usuService.edificiosAmbito"> 
+                                    <div *ngFor="let edificio of usuService.edificiosAmbito ; let i = index">
+                                            <div class=" col-sm-3 ambitos-item " (dblclick)="clickAmbito(edificio)">{{edificio.eNombre}}</div>
+                                         </div>
+                            </div>
+                     
+                    </div>
+        </div>
+    
+     <div class="form-row" style="margin-top:  5px">
+        <div class="form-group col-md-8">
+            <button type="submit" class="btn btn-sm btn-block btn-info">
+        <i class="fa fa-floppy-o"></i> Grabar</button>
+        </div>
+
+        <div class="form-group col-md-4">
+            <button type="button" class="btn btn-sm btn-block btn-secondary" (click)="resetForm(ambitosForm)">
+        <i class="fa fa-repeat"></i> Cancelar</button>
+        </div>
+    </div>
+</form>
+</div>

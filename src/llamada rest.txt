@@ -1,0 +1,4 @@
+POST http://localhost:52879/api/Datos HTTP/1.1
+content-type: application/json
+
+'{"Pedido":[{"Entidad":"UsuariosRoles","Accion":"Lista"}],"Datos":[{"UsuarioId":2}],"ContextoUser":[{"UsuarioId":1,"MenuItem":"Edificios"}],"ContextoWeb":[]}'

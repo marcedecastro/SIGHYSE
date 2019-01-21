@@ -1,0 +1,18 @@
+<ng-template [ngIf]="segInt" [ngIfElse]="usuarioCbo">
+    <span class="font-weight-light border-0">{{ds.getUsuario()}}</span>
+</ng-template>
+
+<ng-template #usuarioCbo>
+    <div id='usuario' ngbDropdown class="d-inline-block col " placement="bottom-right">
+        <button class="btn btn-outline-secondary " id="usuario" ngbDropdownToggle>{{ds.getUsuario()}}</button>
+        <div ngbDropdownMenu aria-labelledby="usuario">
+            <ng-template [ngIf]="ds.getUsuario()" [ngIfElse]="cerrar">
+                <li class="dropdown-item" (click)="this.logout()"> <i class="fa fa-sign-out"></i> Cerrar Sesión</li>
+            </ng-template>
+
+            <ng-template #cerrar>
+                <li class="dropdown-item" routerLink="/login"> <i class="fa fa-sign-in"></i> Iniciar Sesión</li>
+            </ng-template>
+        </div>
+    </div>
+</ng-template>

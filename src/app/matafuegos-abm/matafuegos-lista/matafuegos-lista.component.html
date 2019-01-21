@@ -1,0 +1,57 @@
+<div *ngIf="matService.listaVisible">  
+    <div class="row">  
+   <!--  <div class="col-md-12"> <h6 class="text-center bg-secondary text-white"> Matafuegos </h6></div> -->
+      <div class="col-1 offset-md-9">
+        <a class="btn btn-outline-secondary btn-sm  " (click)="showNew()">
+          <i class="fa fa-plus-circle "></i>  <span> Nuevo Mataafuego</span>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-sm  table-hover">
+          <thead>
+            <tr  > 
+              <th>  </th>   <th>  </th>
+              <!-- lista de titulos-->
+              <Th *ngFor="let titulo of matService.titulos ; let i = index">{{titulo}}</Th>   
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let matafuego of matService.lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+
+              <td > 
+                <a class="btn" (click)="showForEdit(matafuego)"> <i class="fa fa-pencil-square-o"></i> </a>
+              </td>
+              <td>
+              <a class="btn text-danger" (click)="onDelete(matafuego,template)"> <i class="fa fa-trash-o"></i> </a>
+              </td>
+              <!--  campos de la fila-->
+              <td *ngFor="let campo of matService.campos"> {{matafuego[campo]}}</td>
+        
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+<ng-template #template>
+
+    <div class="modal-content">
+    <div class="modal-header">
+
+      <h4 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Matafuego?</h4>
+    </div>
+    <div class="modal-body text-center">
+        <p> Nro de Serie: {{matService.instancia.NroSerie}}</p>
+        <p>         Tipo: {{matService.instancia.Tipo}}</p>
+        <p>         Piso: {{matService.instancia.Piso}}</p>
+        <p>       Puesto: {{matService.instancia.Puesto}}</p>
+
+      <button type="button" class="btn btn-default" (click)="confirm()" >Si</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+    </div>
+  </div>
+
+
+</ng-template>

@@ -1,0 +1,120 @@
+<div *ngIf="rubroService.tipoDocVisible"> 
+    <div class="row">  
+
+    <div class="col-md-6" >  
+        
+      <form class="emp-form" #rubroTipoDcoForm="ngForm" (ngSubmit)="onSubmit(rubroTipoDcoForm)">
+    
+ 
+        <div class="form-row">
+          <div class="form-group col-md-12">
+              <label>Tipo de Documento </label>
+              <input class="form-control  form-control-sm" name="TipoDocDescripcion" #TipoDocDescripcion="ngModel" [(ngModel)]="documento.TipoDocDescripcion" placeholder="Descripción" required>
+            <div class="validation-error" *ngIf="TipoDocDescripcion.invalid && TipoDocDescripcion.touched">El campo es Requerido.</div>
+          </div>
+    
+          <div class="form-group col-md-12">
+              <label>Descripción Larga </label>
+              <input class="form-control  form-control-sm" name="TipoDocDescripcionLarga" #TipoDocDescripcionLarga="ngModel" [(ngModel)]="documento.TipoDocDescripcionLarga" placeholder="Descripción Larga" required>
+            <div class="validation-error" *ngIf="TipoDocDescripcionLarga.invalid && TipoDocDescripcionLarga.touched">El campo es Requerido.</div>
+          </div>
+
+
+
+
+          <div class="form-group col-md-6">
+              <label>Periodicidad </label>
+              <select class="form-control  form-control-sm" name="Periodicidad" #Periodicidad="ngModel" [(ngModel)]="documento.Periodicidad" aria-placeholder="periodicidad"
+                required>
+                <option *ngFor="let periodicidad of periodicidades" [value]="periodicidad.Periodicidad">
+                  {{periodicidad.Descripcion}}</option>
+              </select>
+            </div>
+<!-- #Periodicidad="ngModel" [(ngModel)]="" -->
+            <div class="form-group col-md-6">
+                <label>Tipo de Formulario </label>
+                <select class="form-control  form-control-sm" name="Form"  #Form="ngModel" [(ngModel)]="documento.Form" aria-placeholder="formulario"
+                  required>
+                  <option *ngFor="let formulario of formularios" [value]="formulario.Form">
+                    {{formulario.Descripcion}}</option>
+                </select>
+              </div>
+
+
+
+
+        </div>
+    
+        <div class="form-row">
+          <div class="form-group col-md-8">
+            <button [disabled]="!rubroTipoDcoForm.valid" type="submit" class="btn btn-sm btn-lg btn-block btn-info">
+              <i class="fa fa-floppy-o"></i> Grabar</button>
+          </div>
+          <div class="form-group col-md-4">
+            <button type="button" class="btn btn-sm btn-lg btn-block btn-secondary" (click)="resetForm(rubroTipoDcoForm)">
+              <i class="fa fa-repeat"></i> Limpiar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+
+
+       <div class="col-md-6"> 
+  
+          <div class="col-1 offset-md-10">
+            <a class="btn btn-outline-secondary btn-sm " (click)="Volver()">
+              <i class="fa fa-plus-circle "></i>  <span> Volver</span>
+            </a>
+          </div>
+        <div class="col-md-12"> 
+        <div class="table-responsive">
+          <table class="table table-sm  table-hover">
+            <thead>
+              <tr  > 
+                <th>  </th>   <th>  </th> 
+                <!-- lista de titulos-->
+                <Th *ngFor="let titulo of rubroService.tiposDoc.titulos ; let i = index">{{titulo}}</Th>   
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doc of rubroService.tiposDoc.Datos ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+  
+                <td > 
+                  <a class="btn" (click)="showForEdit(doc)"   title="Editar"> <i class="fa fa-pencil-square-o"></i> </a>
+                </td>
+
+                <td>
+                  <a class="btn text-danger" (click)="onDelete(doc,template)" title="Borrar"> <i class="fa fa-trash-o"></i> </a>
+                </td>
+                <!--  campos de la fila-->
+                <td *ngFor="let campo of rubroService.tiposDoc.campos"> {{doc[campo]}}</td>
+          
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+      
+    </div>
+ </div> 
+  <!-- mensaje de confirmacion-->
+  <ng-template #template>
+  
+      <div class="modal-content">
+      <div class="modal-header">
+  
+        <h4 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el doc?</h4>
+      </div>
+      <div class="modal-body text-center">
+
+        <button type="button" class="btn btn-default" (click)="confirm()" >Si</button>
+        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+      </div>
+    </div>
+  
+  
+  </ng-template>

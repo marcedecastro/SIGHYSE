@@ -1,0 +1,55 @@
+<div *ngIf="usuService.rolesVisible">
+    <h6 class="text-center bg-secondary text-white">  Roles del Usuario </h6>
+    <div class="form-row">
+            <p> Usaurio</p>
+            <div class="form-group col-md-4">
+               <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="usuService.instancia.Nombre"  disabled>
+            </div>
+            <p> Edificio</p>
+            <div class="form-group col-md-4">
+                    <input class="form-control form-control-sm" name="Edificio" #Nombre="ngModel" [(ngModel)]="usuService.instancia.EdificioNombre"  disabled>
+                </div>  
+    </div>
+
+    <form class="emp-form" #rolesForm="ngForm" (ngSubmit)="onSubmit(rolesForm)">
+            <div class="col-md-12"> 
+                <div class="table-responsive">
+                    <table class="table table-sm  ">
+                        <thead>
+                          <tr  > 
+                            <th> Rol </th>   <th> Descripcion  </th> <th>Estado  </th> 
+   
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rol of usuService.roles ; let i = index" >
+                                <td>{{rol.rol}}</td>
+                                <td>{{rol.descripcion}}</td>
+                                <td>
+                                    <input type="hidden" name="Estado" [(ngModel)]="usuService.roles[i].estado">
+                                     <label class="chk-container"> 
+                                            <input type="checkbox"[checked] = "usuService.roles[i].estado === 1" 
+                                            (change)="$event.target.checked? (usuService.roles[i].estado = 1) : (usuService.roles[i].estado= 0)">
+                                            <span class="checkmark"></span>
+                                        </label> 
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+
+
+         <div class="form-row">
+          <div class="form-group col-md-8">
+              <button  type="submit" class="btn btn-sm btn-block btn-info">
+          <i class="fa fa-floppy-o"></i> Grabar</button>
+          </div>
+          <div class="form-group col-md-4">
+              <button type="button" class="btn btn-sm btn-block btn-secondary" (click)="resetForm(rolesForm)">
+          <i class="fa fa-repeat"></i> Cancelar</button>
+          </div>
+      </div>
+  </form>
+  </div>

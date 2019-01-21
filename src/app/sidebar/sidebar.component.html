@@ -1,0 +1,28 @@
+
+
+<div [hidden]="!this.menuService.sidebar">
+  <ngb-accordion *ngFor="let item of getMenu(); index as i" >
+
+      <ngb-panel  >
+        <ng-template ngbPanelTitle>
+        <span> {{item.Datos[0].Nombre}}</span>
+        </ng-template>
+  
+        <ng-template ngbPanelContent  >
+
+          <div *ngIf="item.Hijos.length>0;else submenu">
+            <div   class="list-group"*ngFor="let xitem of item.Hijos">
+              <a  routerLink='{{xitem.Datos[0].Accion}}' class="list-group-item-action"  >{{xitem.Datos[0].Nombre}}</a>
+            </div>
+          </div>
+          <!-- (click)="menuService.sidebar = !menuService.sidebar"-->
+          <ng-template #submenu>
+              <a  routerLink='/{{item.Datos[0].Accion}}' class="list-group-item-action" ngbTooltip= '{{item.Datos[0].Descripcion}}' 
+             >{{item.Datos[0].Nombre}}</a>
+          </ng-template>
+        </ng-template>
+        
+      </ngb-panel>
+
+    </ngb-accordion>
+  </div>
