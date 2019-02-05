@@ -68,12 +68,16 @@ export class DatosService {
         return this._post( 'Edificios', 'ListaTodos', 'Edificios', 1, null );
       }
       case 'Regiones': {
-        return this._post( 'Regiones', 'Lista', 'Regiones', 1, null );
+        return this._post( 'Regiones', 'Lista', 'AdminLegajo', 1, null );
       }
       case 'EdificiosAmbito': {
         return this._post( 'Edificios', 'ListaAmbito', 'Edificios', this.edificioId, Datos );
       }
 
+      case 'EdificioPropiedades': {
+        return this._post( 'EdificioPropiedades', 'Lista', 'Edificios', this.edificioId, Datos );
+      }
+      
       case 'Legajos':   {
         return this._post( 'Legajo', 'LeeCompleto', 'LegajoConsulta', this.edificioId, Datos );
       }
@@ -126,15 +130,24 @@ export class DatosService {
       case 'RubrosTipoDocLista': {
         return this._post( 'RubroTipoDocs', 'Lista', 'RubroTipoDocs', this.edificioId, Datos);
       }
+      case 'legajoInforme': {
 
+          return this._post( 'LegajosResumen', 'Emite', 'Infolegajo', this.edificioId, Datos);
+       }
+      }
     }
-  }
-
+  
   grabaDatos(entidad: string, accion: string, menuItem: string, edificioId: number , Datos: any) {
     return this._post( entidad, accion, menuItem, this.edificioId, Datos );
   }
 
-   private _post(entidad: string, accion: string, menuItem: string, edificioId: number , datos: Object[], ): Observable<string> {
+  getDatosDet(entidad: string, accion: string, menuItem: string, datos: Object[]) {
+
+    return this._post( entidad, accion, menuItem, this.edificioId, datos );
+
+  }
+
+   private _post(entidad: string, accion: string, menuItem: string, edificioId: number , datos: Object[]): Observable<string> {
     const xurl = localStorage.getItem('apiUrl');
 
     const  pedidoMenu = {

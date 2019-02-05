@@ -13,14 +13,22 @@ import {RegionesAbmComponent} from '../regiones-abm/regiones-abm.component';
 import {RubrosAbmComponent} from '../rubros-abm/rubros-abm.component';
 import {LegajoConsultasComponent} from '../legajo-consultas/legajo-consultas.component';
 import {LegajoInformeComponent} from '../legajo-informe/legajo-informe.component';
-
+import {ImpresionComponent} from './../impresion/impresion.component';
+import {GrillaImpresionComponent} from './../_componentes/grilla/grilla-impresion/grilla-impresion.component';
 import {AppComponent} from '../app.component';
 
 const routes: Routes = [
+  { path: 'print',
+    outlet: 'print',
+    component: ImpresionComponent,
+    children: [
+      { path: 'impresiongrilla/:datos', component: GrillaImpresionComponent }
+    ]
+  },
   { path: 'InfoLegajoVence', component: LegajoInformeComponent, canActivate: [AuthGuard] },
   { path: 'InfoLegajoVencio', component: LegajoInformeComponent, canActivate: [AuthGuard] },
   { path: 'InfoLegajoFaltante', component: LegajoInformeComponent, canActivate: [AuthGuard] },
-  { path: 'LegajoConsulta', component: LegajoConsultasComponent, canActivate: [AuthGuard] },
+  { path: 'LegajoConsulta', component: LegajoInformeComponent, canActivate: [AuthGuard] },
   { path: 'Regiones', component: RegionesAbmComponent, canActivate: [AuthGuard] },
   { path: 'Usuarios', component: UsuariosAbmComponent, canActivate: [AuthGuard] },
   { path: 'Rubros', component: RubrosAbmComponent, canActivate: [AuthGuard] },
@@ -31,7 +39,6 @@ const routes: Routes = [
   { path: 'Edificios', component: EdificiosComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', component: HomeComponent }
-
 
 ];
 @NgModule({

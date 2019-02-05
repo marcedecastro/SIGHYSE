@@ -1,16 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~ag-grid-community/dist/styles/ag-grid.css";
 @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
-
-body {
+@import "~@ng-select/ng-select/themes/default.theme.css";body {
     padding-top: 5rem;
-  }
-  .starter-template {
+}
+
+label {
+    font-weight: bold;
+}
+
+.table tr th{
+    font-size: 13px;
+}
+.table tr {
+    max-height: 5px;
+}
+
+.table tr td{
+    font-size: 13px;
+    
+}
+.table{
+    padding: 0 px
+}
+
+.starter-template {
     padding: 3rem 1.5rem;
     text-align: center;
-  }
+}
 
-  .chk-container {
+.chk-container {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -21,51 +41,65 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
- .chk-container input {
+}
+
+
+/* Hide the browser's default checkbox */
+
+.chk-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 30px;
     width: 30px;
     background-color: #eee;
-  }
-  
-  /* On mouse-over, add a grey background color */
- .chk-container:hover input ~ .checkmark {
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.chk-container:hover input~.checkmark {
     background-color: #ccc;
-  }
-  
-  /* When the checkbox is checked, add a blue background 
+}
+
+
+/* When the checkbox is checked, add a blue background 
  .chk-container input:checked ~ .checkmark {
    background-color: rgb(28, 28, 29);
   }
   */
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-  }
-  
-  /* Show the checkmark when checked */
- .chk-container input:checked ~ .checkmark:after {
+}
+
+
+/* Show the checkmark when checked */
+
+.chk-container input:checked~.checkmark:after {
     display: block;
-  }
-  
-  /* Style the checkmark/indicator */
- .chk-container .checkmark:after {
+}
+
+
+/* Style the checkmark/indicator */
+
+.chk-container .checkmark:after {
     left: 9px;
     top: 5px;
     width: 10px;
@@ -75,4 +109,4 @@ body {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
+}

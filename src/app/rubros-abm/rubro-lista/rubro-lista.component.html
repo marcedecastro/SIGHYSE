@@ -1,59 +1,64 @@
-<div *ngIf="rubroService.listaVisible">  
-    <div class="row">  
-       <!--   <div class="col-md-12"> <h6 class="text-center bg-secondary text-white"> Rubros </h6></div>   -->
-  
-          <div class="col-1 offset-md-10">
+<div *ngIf="rubroService.listaVisible">
+    <div class="row">
+        <!--   <div class="col-md-12"> <h6 class="text-center bg-secondary text-white"> Rubros </h6></div>   -->
+
+        <!-- <div class="col-1 offset-md-10">
             <a class="btn btn-outline-secondary btn-sm " (click)="showNew()">
               <i class="fa fa-plus-circle "></i>  <span> Nuevo Rubro</span>
             </a>
           </div>
-        <div class="col-md-12"> 
-        <div class="table-responsive">
-          <table class="table table-sm  table-hover">
-            <thead>
-              <tr  > 
-                <th>  </th>   <th>  </th> <th>  </th> 
-                <!-- lista de titulos-->
-                <Th *ngFor="let titulo of rubroService.titulos ; let i = index">{{titulo}}</Th>   
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let Rubro of rubroService.lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
-  
-                <td > 
-                  <a class="btn" (click)="showForEdit(Rubro)"   title="Editar"> <i class="fa fa-pencil-square-o"></i> </a>
-                </td>
-                <td > 
-                    <a class="btn" (click)="showtipoDoc(Rubro)"   title="Tipos de Documento"> <i class="fa fa-vcard-o"></i> </a>
-                  </td>
+           -->
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-sm  table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th colspan="3">
+                                <div>
+                                    <button type="button" class="btn btn-info btn-xs" (click)="showNew()">Nuevo Rubro <i class= "fa fa-plus-circle"></i> </button>
+                                </div>
+                            </th>
+                            <!-- lista de titulos-->
+                            <Th *ngFor="let titulo of rubroService.titulos ; let i = index">{{titulo}}</Th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Rubro of rubroService.lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
 
-                      <td>
-                <a class="btn text-danger" (click)="onDelete(Rubro,template)" title="Borrar"> <i class="fa fa-trash-o"></i> </a>
-                </td>
-                <!--  campos de la fila-->
-                <td *ngFor="let campo of rubroService.campos"> {{Rubro[campo]}}</td>
-          
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                            <td>
+                                <a class="btn" (click)="showForEdit(Rubro)" title="Editar"> <i class="fa fa-pencil-square-o"></i> </a>
+                            </td>
+                            <td>
+                                <a class="btn" (click)="showtipoDoc(Rubro)" title="Tipos de Documento"> <i class="fa fa-vcard-o"></i> </a>
+                            </td>
+
+                            <td>
+                                <a class="btn text-danger" (click)="onDelete(Rubro,template)" title="Borrar"> <i class="fa fa-trash-o"></i> </a>
+                            </td>
+                            <!--  campos de la fila-->
+                            <td *ngFor="let campo of rubroService.campos"> {{Rubro[campo]}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-  </div>
-  <!-- mensaje de confirmacion-->
-  <ng-template #template>
-  
-      <div class="modal-content">
-      <div class="modal-header">
-  
-        <h4 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Rubro?</h4>
-      </div>
-      <div class="modal-body text-center">
+</div>
+<!-- mensaje de confirmacion-->
+<ng-template #template>
 
-        <button type="button" class="btn btn-default" (click)="confirm()" >Si</button>
-        <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
-      </div>
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <h4 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Rubro?</h4>
+        </div>
+        <div class="modal-body text-center">
+
+            <button type="button" class="btn btn-default" (click)="confirm()">Si</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
     </div>
-  
-  
-  </ng-template>
+
+
+</ng-template>

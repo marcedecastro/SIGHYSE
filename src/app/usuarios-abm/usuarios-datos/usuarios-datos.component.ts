@@ -37,7 +37,7 @@ export class UsuariosDatosComponent implements OnInit {
        this.usuService.graba('Graba').subscribe(
         res => {
           if (JSON.parse(res).Status[0].Status  === 0) {
-            this.mensajesService.success('Edificio guardado sactifactoriamente');
+            this.mensajesService.success('Usuario guardado sactifactoriamente');
             this.usuService.nuevaInstancia();
             this.usuService.getLista();
             form.resetForm();
@@ -46,7 +46,7 @@ export class UsuariosDatosComponent implements OnInit {
             this.usuService.rolesVisible = false;
             this.usuService.ambitoVisible = false;
           } else {
-            this.mensajesService.error(JSON.parse(res).Status[0].Msg, 'Matafuego');
+            this.mensajesService.error(JSON.parse(res).Status[0].Msg, 'Usuario');
             this.usuService._mostrarErrores(JSON.parse(res).Mensajes);
           }
          },

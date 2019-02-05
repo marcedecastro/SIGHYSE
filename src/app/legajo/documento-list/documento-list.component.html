@@ -1,58 +1,59 @@
-<div *ngIf="legajoService.listaVisible"> 
-<h6 class="text-center bg-secondary text-white"> Doumentos </h6>
-  <div class="row">
-      <div class="col-1 offset-md-9">
-          <a class="btn btn-outline-secondary btn-sm " (click)="showNew()">
-            <i class="fa fa-plus-circle "></i>  <span> Nuevo Documento</span>
-          </a>
-        </div>  
-      <div class="col-md-12">
-        <div class="table-responsive" >
-          <table class="table table-sm  table-hover">
-            <thead>
-            <tr > 
+<div *ngIf="legajoService.listaVisible">
+    <h5 class="text-center bg-secondary text-white"> Documentos </h5>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-sm  table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th colspan="2">
+                                <div>
+                                    <button type="button" class="btn btn-info btn-xs" (click)="showNew()">Nuevo Documento <i class= "fa fa-plus-circle"></i> </button>
+                                </div>
+                            </th>
 
-              <th>  </th>   <th></th>
-              <Th *ngFor="let titulo of legajoService.titulos ; let i = index">{{titulo}}</Th> 
-          </thead>
-            <tr *ngFor="let documento of tipoDoc.Documentos ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                            <!-- lista de titulos-->
+                            <Th *ngFor="let titulo of legajoService.titulos ; let i = index">{{titulo}}</Th>
+                        </tr>
+                    </thead>
+                    <tr *ngFor="let documento of tipoDoc.Documentos ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
 
-                <td>
-                      <a class="btn" (click)="showForEdit(documento)">
-                    <i class="fa fa-pencil-square-o"></i>
-                  </a>
-                </td>
-                <td>
-                <a class="btn text-danger" (click)="onDelete(documento,template)">
-                    <i class="fa fa-trash-o"></i>
-                  </a>
-                </td>
+                        <td>
+                            <a class="btn" (click)="showForEdit(documento)">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn text-danger" (click)="onDelete(documento,template)">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
 
-                <td *ngFor="let campo of legajoService.campos"> {{documento[campo]}}</td>
-     
+                        <td *ngFor="let campo of legajoService.campos"> {{documento[campo]}}</td>
 
 
-            </tr>
-          </table>
+
+                    </tr>
+                </table>
+            </div>
         </div>
-      </div> 
-  </div>
+    </div>
 </div>
 
 <ng-template #template>
 
-  <div class="modal-content">
-  <div class="modal-header">
+    <div class="modal-content">
+        <div class="modal-header">
 
-    <h5 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Documento?</h5>
-  </div>
-  <div class="modal-body text-center">
-      <p> {{legajoService.instancia.Detalle}}</p>
+            <h5 id="dialog-static-name" class="modal-title pull-left">Desea Borrar el Documento?</h5>
+        </div>
+        <div class="modal-body text-center">
+            <p> {{legajoService.instancia.Detalle}}</p>
 
-    <button type="button" class="btn btn-default" (click)="confirm()" >Si</button>
-    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
-  </div>
-</div>
+            <button type="button" class="btn btn-default" (click)="confirm()">Si</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </div>
 
 
 </ng-template>

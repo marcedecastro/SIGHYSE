@@ -1,25 +1,73 @@
-<div class="table-responsive" >
-    <table class="table table-sm  table-hover">
-      <thead>
-      <tr > 
 
-        <th>  </th>  
-        <Th *ngFor="let titulo of titulos1 ; let i = index">{{titulo}}</Th> 
-    </thead>
-      <tr *ngFor="let elemento of nivel1 ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+<div class="form-row" *ngIf='filtros'>
+    <div class="form-group col-md-2">
+       <label>Edificios </label>
+      <ng-select [items]="edificios"
+        bindLabel="eNombre"
+        bindValue="EdificioId"
+        groupBy="RegionId"
+        [selectableGroup]="true"
+        [closeOnSelect]="false"
+        [multiple]="true"
+        placeholder="Seleccione edificios"
+        [(ngModel)]="edificiosSeleccionados">
+        <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.RegionId}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.eNombre}}
+        </ng-template>
+        </ng-select>
 
+      </div>
+    <div class="form-group col-md-4">
+        <label>Rubros </label>
+        <ng-select [items]="rubros"
+          bindLabel="DescripcionCorta"
+          bindValue="RubroId"
 
-          
-          <td>
-          <a class="btn text-danger" >
-              <i class="fa fa-plus-o"></i>
-            </a>
-          </td>
+          [multiple]="true"
+          [closeOnSelect]="false"
+          placeholder="Seleccione rubros"
+          [(ngModel)]="rubrosSeleccionados">
 
-          <td *ngFor="let campo of campos1"> {{elemento[campo]}}</td>
+          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+              <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.DescripcionCorta}}
+          </ng-template>
+        </ng-select>
 
+      </div>
 
+      <div class="form-group col-md-2">
+          <label for="FechaDesde">Fecha Desde</label>
+          <input class="form-control  form-control"  type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaDesde" #FechaDesde="ngModel" [(ngModel)]="fechaDesde"
+            placeholder="Fecha Desde" required>
+      </div>
+      <div class="form-group col-md-2">
+          <label for="FechaHasta">Fecha Hasta</label>
+          <input class="form-control  form-control"  type= "text" bsDatepicker [bsConfig]="dpkConf" name="FechaHasta" #FechaDesde="ngModel" [(ngModel)]="fechaHasta"
+            placeholder="Fecha Hasta" required>
+      </div>
 
-      </tr>
-    </table>
-  </div>
+      <div>
+
+        <button type="button" class="btn btn-info btn-xs" (click)="ejecutarConsulta()">Ejecutar Consulta <i class= "fa fa-arrow-circle-right"></i> </button>
+    </div>
+    
+</div>  
+
+<div   *ngIf='grilla'>
+     <div class="col col-md-1  offset-md-11"  >
+                <button type="button" class="btn btn-info " (click)="grilla=false; filtros=true">Filtros <i class= "fa fa-arrow-circle-right"></i> </button>   
+    </div> 
+    <div class="row" >
+            <app-grilla 
+            [datos]=datos 
+            [titulos]=titulos
+            [titulosSaltos]=titulosSaltos
+        >
+         </app-grilla> 
+        
+    </div>
+  
+</div>
