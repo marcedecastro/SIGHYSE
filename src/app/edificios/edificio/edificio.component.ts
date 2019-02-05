@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { ToastrService} from 'ngx-toastr';
 import { DatosService } from '../../_servicios/datos.service';
 import {Provincia } from '../../_Modelos/provincia';
+import {Region } from '../../_Modelos/Region';
+import {EdificioPropiedades} from '../../_Modelos/EdificioPropiedades';
 import { EdificioService } from '../../_servicios/edificio.service';
 
 @Component({
@@ -14,14 +16,20 @@ import { EdificioService } from '../../_servicios/edificio.service';
 })
 export class EdificioComponent implements OnInit {
   // variables para comobo de provincia
-  private provincias: Provincia[];
-
+  public provincias: Provincia[];
+  public edificioPropiedades: EdificioPropiedades[];
+  public  regiones: Region[];
   constructor(public edificioService: EdificioService, private  ds: DatosService , private mensajesService: ToastrService ) { }
 
   ngOnInit() {
     this.ds.getDatos('provincias').subscribe(res =>
        this.provincias = JSON.parse(res).Datos);
-   // this.resetForm();
+    this.ds.getDatos('Regiones').subscribe(res =>
+        this.regiones = JSON.parse(res).Datos);
+    this.ds.getDatos('EdificioPropiedades').subscribe(res =>
+          this.edificioPropiedades = JSON.parse(res).Datos);
+          
+       // this.resetForm();
   }
 
 

@@ -17,7 +17,7 @@ export class DocumentoArchivoComponent implements OnInit {
   archivos: Archivo[] = [];
   archivosStr = '';
   private modalRef: BsModalRef;
-constructor(public legajoService: LegajoService,  private modalService: BsModalService, private mensajesService: ToastrService ) { }
+constructor(private legajoService: LegajoService,  private modalService: BsModalService, private mensajesService: ToastrService ) { }
 
 ngOnInit() {
 }
@@ -56,7 +56,14 @@ confirm(): void {
    this.archivo.TipoDoc = this.legajoService.instancia.TipoDoc;
    this.archivo.Renglon = this.legajoService.instancia.Renglon;
    this.archivo.DocumentoId = this.legajoService.instancia.DocumentoId;
-   this.legajoService.grabaArchivo (this.archivo, 'GrabaBaja');
+   this.legajoService.grabaArchivo (this.archivo, 'GrabaBaja').subscribe( ped => {
+    if (JSON.parse(ped).Status[0].Status  === 0) {
+       this.mensajesService.success('archivo' + JSON.parse(ped).Datos[0].NombreArchivo + ' eliminado sactifactoriamente');
+      // this.getDocumentos('Documento');
+      } else {
+         this.mensajesService.error('Error al obtener archivo : ' + JSON.parse(ped).Status[0].Msg);
+      }
+    });
 
  }
 
@@ -74,17 +81,31 @@ onDownload(DocumentoId: number) {
 GrabaArchivos() {
 
   let i: number;
-
+  let archivo: string;
+  let tipo: string;
   for ( i = 0; i < this.archivos.length; i++) {
     this.archivos[i].LegajoId = this.legajoService.instancia.LegajoId;
     this.archivos[i].RubroId = this.legajoService.instancia.RubroId;
     this.archivos[i].TipoDoc = this.legajoService.instancia.TipoDoc;
     this.archivos[i].Renglon = this.legajoService.instancia.Renglon;
     this.archivos[i].DocumentoId = this.legajoService.instancia.DocumentoId;
-    this.legajoService.grabaArchivo (this.archivos[i], 'Graba');
+    archivo = this.archivos[i].NombreArchivo;
+    tipo = this.archivos[i].TipoArchivo;
+    this.legajoService.grabaArchivo (this.archivos[i], 'Graba').subscribe( ped => {
+      if (JSON.parse(ped).Status[0].Status  === 0) {
+         this.mensajesService.success('archivo' + archivo +  'guardado sactifactoriamente');
+         this.archivos = [] ;
+         this.archivosStr = '';
+         this.legajoService.instancia.DocumentosArchivos.push(
+            {DocumentoId: JSON.parse(ped).Datos[0].DocumentoId,
+              NombreArchivo: archivo, TipoArchivo: tipo});
+        //  this.legajoService.getDocumentos('Documento');
+        } else {
+           this.mensajesService.error('Error al obtener archivo : ' + JSON.parse(ped).Status[0].Msg);
+        }
+      });
   }
-    this.archivos = [] ;
-    this.archivosStr = '';
+
 }
 
 ab2str(buf: any): string {

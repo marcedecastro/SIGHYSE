@@ -48,10 +48,15 @@ export class MenuService {
     getEdificios() {
       this.datosService.getDatos('EdificiosAmbito')
       .subscribe(res => {
-        this.edificios = JSON.parse(res).Datos;
-        localStorage.setItem('edificioId', this.edificios[0].EdificioId.toString());
-        this.datosService.edificioId = this.edificios[0].EdificioId.toString();
-        this.setMenu(this.menu);
+        if (JSON.parse(res).Status[0].Status  === 0) {
+          this.edificios = JSON.parse(res).Datos;
+          localStorage.setItem('edificioId', this.edificios[0].EdificioId.toString());
+          this.datosService.edificioId = this.edificios[0].EdificioId.toString();
+          this.setMenu(this.menu);
+        } else {
+            this.mensajesService.error('Error al cargar Ambito del usuario:' + JSON.parse(res).Status[0].Msg);
+          }
+
       },
         error => { this.mensajesService.error(error); });
     }

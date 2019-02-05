@@ -91,21 +91,14 @@ export class LegajoService {
     }
 
     grabaArchivo(datos: any, opcion: string) {
-    this.datosService.grabaDatos('LegajoArchivo', opcion, 'LegajoActualizacion', 1, datos).subscribe( ped => {
-      if (JSON.parse(ped).Status[0].Status  === 0) {
-         this.getDocumentos();
-         this.mensajesService.success('archivo guardado sactifactoriamente');
-        } else {
-           this.mensajesService.error('Error al obtener archivo : ' + JSON.parse(ped).Status[0].Msg);
-        }
-      });
+    return  this.datosService.grabaDatos('LegajoArchivo', opcion, 'LegajoActualizacion', 1, datos);
     }
 
     grabaCabecera(datos: any, opcion: string) {
       this.datosService.grabaDatos('Legajo', opcion, 'Legajo', 1, datos).subscribe(
         res => {
           if (JSON.parse(res).Status[0].Status  === 0) {
-            this.getDocumentos();
+            this.getDocumentos('Lista');
             switch (opcion) {
               case 'Grababaja':
                 this.mensajesService.success('documento ha sido eliminado eliminado');
@@ -124,11 +117,11 @@ export class LegajoService {
       this.tipoDoc = tipoDoc;
       this.formulario = tipoDoc.TipoDocDefinicion[0].Form;
       this.rubroNombre = rubroNombre;
-      this.getDocumentos();
+      this.getDocumentos('Lista');
 
      }
 
-    getDocumentos() {
+    getDocumentos(panel: string) {
       let titulos;
       const columnas = [20, 21, 22, 25, 32, 33, 34, 35];
       const Datos = [{'LegajoId': this.tipoDoc.LegajoId,
@@ -142,7 +135,7 @@ export class LegajoService {
           titulos = this.datosService.getTitulos( JSON.parse(ped).Titulos, columnas);
           this.titulos = titulos.titulos;
           this.campos = titulos.campos;
-          this.habilitaPaneles('Lista');
+          this.habilitaPaneles(panel);
         } else {
             this.tipoDoc.Documentos = [];
             this.EtipoDoc.emit(this.tipoDoc);

@@ -1,12 +1,12 @@
-/* componente sin estilo*/
-
-  .fuenteChica{
+.fuenteChica {
+    font-family: 'Poppins', sans-serif;
     font-size: 80%;
-    
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
 
-  }
-
-  .miAcordion {
-    height:600px;
+.miAcordion {
+    height: 600px;
     overflow-y: scroll;
-  }
+}

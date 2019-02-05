@@ -1,4 +1,8 @@
-POST http://localhost:52879/api/Datos HTTP/1.1
+POST https://WShigySegDesa.trabajo.gob.ar/api/Datos HTTP/1.1
 content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IlRSQUJBSk9cXE1ERUNBU1RSTyIsIklkIjoiMSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjEiLCJuYmYiOjE1NDgwOTA2OTEsImV4cCI6MTU0ODA5MTg5MSwiaWF0IjoxNTQ4MDkwNjkxLCJpc3MiOiJodHRwOi8vd3NoaWd5c2VnZGVzYS50cmFiYWpvLmdvYi5hciIsImF1ZCI6Imh0dHA6Ly93c2hpZ3lzZWdkZXNhLnRyYWJham8uZ29iLmFyIn0.OAfSrubadz-zFGgXFz9isgT4tTgqFoudSaPh7xbPBWs
 
-'{"Pedido":[{"Entidad":"UsuariosRoles","Accion":"Lista"}],"Datos":[{"UsuarioId":2}],"ContextoUser":[{"UsuarioId":1,"MenuItem":"Edificios"}],"ContextoWeb":[]}'
+'{"Pedido":[{"Entidad":"LegajosResumen","Accion":"Emite"}],
+"Datos":[{"FormatoSalida":0,"Edificios":[1],
+"Rubros":[10,20],"FechaDesde":"01/01/2010","FechaHasta":"10/10/2020"}],
+"ContextoUser":[{"UsuarioId":"1","MenuItem":"Infolegajo","EdificioId":"1"}],"ContextoWeb":[]}'

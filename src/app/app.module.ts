@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
- import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
  import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  import { ToastrModule } from 'ngx-toastr';
@@ -13,7 +15,8 @@ import { FormsModule } from '@angular/forms';
  import { SortableModule } from 'ngx-bootstrap';
 // ag grid
 import { AgGridModule } from 'ag-grid-angular';
- 
+import {ExcelService} from './_servicios/excel.service';
+import {ImpresionService} from './_servicios/impresion.service';
  // funcionalidades de ruteo
  
  import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -62,6 +65,8 @@ import { LegajoInformeComponent } from './legajo-informe/legajo-informe.componen
 import { RegionesAbmComponent } from './regiones-abm/regiones-abm.component';
 import { RegionesListaComponent } from './regiones-abm/regiones-lista/regiones-lista.component';
 import { RegionDatosComponent } from './regiones-abm/region-datos/region-datos.component';
+import { ImpresionComponent } from './impresion/impresion.component';
+import { GrillaImpresionComponent } from './_componentes/grilla/grilla-impresion/grilla-impresion.component';
 
 
 
@@ -110,9 +115,12 @@ defineLocale('es', esLocale);
     RegionesAbmComponent,
     RegionesListaComponent,
     RegionDatosComponent,
+    ImpresionComponent,
+    GrillaImpresionComponent,
 
   ],
   imports: [
+    NgSelectModule,
     HttpClientModule,
     NgbModule,
     BsDatepickerModule.forRoot(), // para usar Date Pickers
@@ -126,7 +134,7 @@ defineLocale('es', esLocale);
     FormsModule
 
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, ExcelService, ImpresionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

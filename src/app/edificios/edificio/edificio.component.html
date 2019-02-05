@@ -1,92 +1,112 @@
-<div *ngIf="edificioService.datosVisible">  
-    <h6 class="text-center bg-secondary text-white">  Datos del edificio </h6>
-  <form class="emp-form" #edificioForm="ngForm" (ngSubmit)="onSubmit(edificioForm)">
-    <input type="hidden" name="EdificioId" #EdificioId="ngModel" [(ngModel)]="edificioService.instancia.EdificioId">
-    <input type="hidden" name="FechaAlta" #FechaAlta="ngModel" [(ngModel)]="edificioService.instancia.FechaAlta">
-    <input type="hidden" name="FechaActualizacion" #FechaActualizacion="ngModel" [(ngModel)]="edificioService.instancia.FechaActualizacion">
-    <input type="hidden" name="UsuarioId" #UsuarioId="ngModel" [(ngModel)]="edificioService.instancia.UsuarioId">
+<div *ngIf="edificioService.datosVisible">
+    <h5 class="text-center bg-secondary text-white"> Información del Edificio </h5>
+    <form class="emp-form" #edificioForm="ngForm" (ngSubmit)="onSubmit(edificioForm)">
+        <input type="hidden" name="EdificioId" #EdificioId="ngModel" [(ngModel)]="edificioService.instancia.EdificioId">
+        <input type="hidden" name="FechaAlta" #FechaAlta="ngModel" [(ngModel)]="edificioService.instancia.FechaAlta">
+        <input type="hidden" name="FechaActualizacion" #FechaActualizacion="ngModel" [(ngModel)]="edificioService.instancia.FechaActualizacion">
+        <input type="hidden" name="UsuarioId" #UsuarioId="ngModel" [(ngModel)]="edificioService.instancia.UsuarioId">
 
-    <div class="form-row">
-      <div class="form-group col-md-11">
-         <label>Nombre </label>
-        <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="edificioService.instancia.Nombre" placeholder="Nombre"
-          required>
-        <div class="validation-error" *ngIf="Nombre.invalid && Nombre.touched">El campo es Requerido.</div>
-      </div>
-      <div class="form-group col-md-1">
-          <label>Estado </label>
-     <!--   <input type="checkbox" class="form-control form-control-sm" name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" placeholder="Estado">-->
-        <label class="chk-container"> 
-            <input type="checkbox"  name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado">
-            <span class="checkmark"></span>
-        </label>
-      </div>
-    </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Nombre </label>
+                <input class="form-control form-control-sm" name="Nombre" #Nombre="ngModel" [(ngModel)]="edificioService.instancia.Nombre" placeholder="Nombre" required>
+                <div class="validation-error" *ngIf="Nombre.invalid && Nombre.touched">El campo es Requerido.</div>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Dirección </label>
+                <input class="form-control  form-control-sm" name="Direccion" #Direccion="ngModel" [(ngModel)]="edificioService.instancia.Direccion" placeholder="Dirección" required>
+                <div class="validation-error" *ngIf="Direccion.invalid && Direccion.touched">El campo es Requerido.</div>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Código Postal </label>
+                <input class="form-control form-control-sm" name="CodPostal" #CodPostal="ngModel" [(ngModel)]="edificioService.instancia.Codpostal" placeholder="Codigo Postal">
+            </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-12">
-          <label>Dirección </label>
-          <input class="form-control  form-control-sm" name="Direccion" #Direccion="ngModel" [(ngModel)]="edificioService.instancia.Direccion" placeholder="Dirección" required>
-        <div class="validation-error" *ngIf="Direccion.invalid && Direccion.touched">El campo es Requerido.</div>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Provincia </label>
-        <select class="form-control  form-control-sm" name="Pcia" #Pcia="ngModel" [(ngModel)]="edificioService.instancia.Pcia" aria-placeholder="Provincia"
-          required>
-          <option *ngFor="let provincia of provincias" [value]="provincia.Pcia">
-            {{provincia.Provincia}}</option>
-        </select>
-      </div>
-
-        <div class="form-group col-md-6">
-          <label>Localidad </label>
-        <input class="form-control form-control-sm" name="Localidad" #Localidad="ngModel" [(ngModel)]="edificioService.instancia.Localidad" placeholder="Localidad">
+            <div class="form-group col-md-1">
+                <label>Estado </label>
+                <!--   <input type="checkbox" class="form-control form-control-sm" name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" placeholder="Estado">-->
+                <label class="chk-container"> 
+                <input type="checkbox"  name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" required>
+                  <span class="checkmark"></span>
+                </label>
+            </div>
         </div>
 
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-          <label>Código Postal </label>
-        <input class="form-control" name="Codpostal" #Codpostal="ngModel" [(ngModel)]="edificioService.instancia.Codpostal"
-          placeholder="Codigo Postal">
-      </div>
-      <div class="form-group col-md-6">
-          <label>Contacto </label>
-        <input class="form-control" name="Contacto" #Contacto="ngModel" [(ngModel)]="edificioService.instancia.Contacto" placeholder="Contacto">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-          <label>Teléfono </label>
-        <input class="form-control  form-control-sm" name="Telefono" #Telefono="ngModel" [(ngModel)]="edificioService.instancia.Telefono" placeholder="Telefono">
-      </div>
-      <div class="form-group col-md-6">
-          <label>Ubicación </label>
-        <input class="form-control  form-control-sm" name="Ubicacion" #Ubicacion="ngModel" [(ngModel)]="edificioService.instancia.Ubicacion" placeholder="Ubicacion">
-      </div>
-    </div>
+        <div class="form-row">
 
+            <div class="form-group col-md-4">
+                <label>Región </label>
+                <select class="form-control  form-control-sm" name="Region" #Region="ngModel" [(ngModel)]="edificioService.instancia.Region" aria-placeholder="Regiones" required>
+               <option *ngFor="let region of regiones" [value]="region.Region">
+                {{region.Nombre}}</option>
+            </select>
+            </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-12">
-          <label>Nota </label>
-        <input class="form-control  form-control-sm" name="Nota" #Nota="ngModel" [(ngModel)]="edificioService.instancia.Nota" placeholder="Nota">
-      </div>
-    </div>
+            <div class="form-group col-md-4">
+                <label>Provincia </label>
+                <select class="form-control  form-control-sm" name="Pcia" #Pcia="ngModel" [(ngModel)]="edificioService.instancia.Pcia" aria-placeholder="Provincia" required>
+                   <option *ngFor="let provincia of provincias" [value]="provincia.Pcia">
+                    {{provincia.Provincia}}</option>
+                </select>
+            </div>
 
+            <div class="form-group col-md-4">
+                <label>Localidad </label>
+                <input class="form-control form-control-sm" name="Localidad" #Localidad="ngModel" [(ngModel)]="edificioService.instancia.Localidad" placeholder="Localidad" required>
+            </div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group col-md-8">
-        <button [disabled]="!edificioForm.valid" type="submit" class="btn btn-sm btn-lg btn-block btn-info">
+        <div class="form-row">
+
+            <div class="form-group col-md-4">
+                <label>Propiedad </label>
+                <select class="form-control  form-control-sm" name="Propiedad" #Propiedad="ngModel" [(ngModel)]="edificioService.instancia.Propiedad" aria-placeholder="Provincia">
+                   <option *ngFor="let edifpropiedad of edificioPropiedades" [value]="edifpropiedad.Propiedad">
+                    {{edifpropiedad.Descripcion}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Email </label>
+                <input class="form-control form-control-sm" name="Mail" #Mail="ngModel" [(ngModel)]="edificioService.instancia.Mail" placeholder="Email">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Cantidad Personal </label>
+                <input class="form-control  form-control-sm" name="CantPersonal" #CantPersonal="ngModel" [(ngModel)]="edificioService.instancia.CantPersonal" placeholder="Telefono">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Contacto </label>
+                <input class="form-control form-control-sm" name="Contacto" #Contacto="ngModel" [(ngModel)]="edificioService.instancia.Contacto" placeholder="Contacto">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Teléfono </label>
+                <input class="form-control  form-control-sm" name="Telefono" #Telefono="ngModel" [(ngModel)]="edificioService.instancia.Telefono" placeholder="Telefono">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Ubicación </label>
+                <input class="form-control  form-control-sm" name="Ubicacion" #Ubicacion="ngModel" [(ngModel)]="edificioService.instancia.Ubicacion" placeholder="Ubicacion">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>Nota </label>
+                <input class="form-control  form-control-sm" name="Nota" #Nota="ngModel" [(ngModel)]="edificioService.instancia.Nota" placeholder="Nota">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <button [disabled]="!edificioForm.valid" type="submit" class="btn btn-sm btn-lg btn-block btn-info">
           <i class="fa fa-floppy-o"></i> Grabar</button>
-      </div>
-      <div class="form-group col-md-4">
-        <button type="button" class="btn btn-sm btn-lg btn-block btn-secondary" (click)="resetForm(EdificioForm)">
+            </div>
+            <div class="form-group col-md-4">
+                <button type="button" class="btn btn-sm btn-lg btn-block btn-secondary" (click)="resetForm(EdificioForm)">
           <i class="fa fa-repeat"></i> Cancelar</button>
-      </div>
-    </div>
-  </form>
+            </div>
+        </div>
+    </form>
 </div>

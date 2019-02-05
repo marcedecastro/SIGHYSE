@@ -1,8 +1,8 @@
 <div class=" conteiner-fluid">
     <nav class="navbar navbar-expand-lg navbar navbar-light bg-light fixed-top">
         <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> -->
-        <a class="navbar-brand" href="#">
-            <img src="/app/imagenes/descarga.jpg" width="40" height="40" class="d-inline-block align-top" alt=""> SiGHySe </a>
+        <a class=" text-info navbar-brand" href="#">
+            <img src="../../assets/imagenes/seghig.jpg" width="40" height="40" class="d-inline-block align-top" alt=""> HIGySEG </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#barraMenu" aria-controls="barraMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -70,19 +70,19 @@
                 </ul>
             </div>
 
-            <div class="d-inline-block  col text-right ">
-                <select #edificio (change)="this.cambiarEdificio(edificio.value)" class=" mdb-select md-form bg-light" searchable="Busque su Edificio">
+            <div class="d-inline-block  align-content-end col pull-right">
+                <select #edificio (change)="this.cambiarEdificio(edificio.value)" class="form-control col-md-2 align-content-lg-end" searchable="Busque su Edificio">
                    
                     <option *ngFor="let edif of menuService.edificios" [value]="edif.EdificioId">
                       {{edif.Nombre}} </option>
                 </select>
             </div>
 
+
             <app-usuario></app-usuario>
             <!-- <span class="navbar-text text-primary">
-                    +54 11 43106419
+                    (6419)
             </span> -->
         </div>
     </nav>
 </div>
-

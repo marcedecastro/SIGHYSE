@@ -1,1 +1,105 @@
  
+<div *ngIf="!impService.isPrinting">
+
+    <div class="row">
+        <div class="col col-md-3 mr-auto "  >
+            <button type="button"  (click)="ExportarExcel()">Excell <i class= "fa fa-file-excel-o"></i> </button>
+            <button type="button" (click)="Imprimir()">Imprimir <i class= "fa fa-print"></i> </button>
+            </div> 
+    
+    </div>
+
+    <div id="tblDatos" class="row">
+        <div class="col col-md-12 "  >
+            <div class="table-responsive "  *ngIf='datos' >
+                <ng-container  
+                    [ngTemplateOutlet]="tabla"
+                    [ngTemplateOutletContext]="{nivel:datos,titulos:titulos}">
+                </ng-container>          
+            </div>
+        </div>
+            
+    </div>
+            
+</div>
+
+<!-- ============= Templates ==================-->
+<!-- Tabla Maestro-->
+<ng-template #tabla let-nivel='nivel' let-titulos='titulos'  >
+    <div *ngIf="titulos && nivel">
+    <div *ngIf="getTitulosNivel(nivel, titulos)"> 
+    <table class="table table-sm  table-hover">
+        <thead>
+        <tr *ngIf="nivel" > 
+    
+            <th>  </th>  
+            <Th *ngFor="let titulo of nivel.titulos.titulos ; let i = index">{{titulo}}</Th> 
+            </tr>
+        </thead>
+    
+        <tbody>
+
+            <ng-container  *ngFor="let elemento of nivel; let i = index" [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{elemento:elemento, campos:nivel.titulos.campos,subnivel: setNivel2(elemento), titulos: nivel.titulos.titulos}">
+            </ng-container>
+
+        </tbody>
+        </table>
+    </div>
+    </div>
+</ng-template>
+
+<!-- Tabla Detalle-->
+<ng-template #item let-elemento='elemento' let-campos='campos' let-subnivel='subnivel' let-titulos='titulos' >
+    <tr   >        
+        <td > 
+            <a class="btn" *ngIf="subnivel" (click)="setDetalle(elemento,subnivel) "> 
+            <i class="fa fa-chevron-down" *ngIf="!elemento.detalle"></i> 
+            <i class="fa fa-chevron-up" *ngIf="elemento.detalle"></i>
+            </a>
+        </td>
+        <td *ngFor="let campo of campos; let x = index "> 
+            <div >    {{elemento[campo.nombre]}} 
+                    <a *ngIf="campo.detalle.length > 0" (click)="mostrarDetalle(elemento, campo.detalle, titulos[x], detTempalte)" >   
+                            <i class="fa fa-search" ></i> 
+                    </a>
+            </div> 
+        </td>                   
+    </tr>
+    <tr *ngIf="elemento.detalle">  
+        <td colspan="12" >
+            <ng-container  
+                [ngTemplateOutlet]="tabla" 
+                [ngTemplateOutletContext]={nivel:subnivel}>
+            </ng-container>
+        </td>
+    </tr>
+</ng-template>|
+
+<ng-template #detTempalte let-titulo='titulo' role="dialog">
+    <div class="modal-content">
+
+            <div class="modal-header">
+                       <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarDetalle()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+    
+
+            <div class="modal-body">
+
+                    <div class="table table-responsive "  >
+                        <ng-container  
+                            [ngTemplateOutlet]="tabla"
+                            [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales}">
+                        </ng-container>          
+                    </div>
+
+                    
+            </div>
+    
+    </div>
+
+    
+</ng-template>        
+      

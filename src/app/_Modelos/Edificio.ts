@@ -7,6 +7,10 @@ export class Edificio {
     Provincia: number;
     ProvinciaNombre: String;
     Codpostal: String;
+    Region: number;
+    Propiedad: number;
+    CantPersonal: number;
+    Mail: String;
     Contacto: String;
     Telefono: String;
     Ubicacion: String;

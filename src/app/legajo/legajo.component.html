@@ -1,27 +1,36 @@
-
 <div *ngIf="editar">
-<div style="text-align:center" >
-    <h1 class=" bg-secondary text-white">Legajo</h1>
-      
-  </div>
-  <div class="row"> 
-    <div class="col-md-3"> <!-- columna de la sidebar izquierda -->
-      <app-legajo-rubros></app-legajo-rubros> 
-    </div>
-    <div class="col-md-9" *ngIf="legajoService.formulario === 1"> <!-- columna de la main view -->
-      {{legajoService.rubroNombre}}/
-      {{legajoService.tipoDoc.TipoDocDefinicion[0].Descripcion}}
-      <app-legajo-documentos>	</app-legajo-documentos>
-
-      <app-documento-archivo></app-documento-archivo>  
-      <app-documento-list ></app-documento-list>
- 
-
+    <div style="text-align:center">
+        <h1 class=" bg-secondary text-white">Legajo Técnico</h1>
 
     </div>
-    <div class="col-md-9" *ngIf="legajoService.formulario === 5"> <!-- columna de la main view -->
-      <app-matafuegos-abm></app-matafuegos-abm>
+    <div class="row">
+        <div class="col-md-3">
+            <!-- columna de la sidebar izquierda -->
+            <app-legajo-rubros></app-legajo-rubros>
+        </div>
+        <div class="col-md-9" *ngIf="legajoService.formulario === 1">
+            <!-- columna de la main view -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <!-- <li class="breadcrumb-item"><a href="#">  </a></li> -->
+                    <li class="breadcrumb-item active text-info">{{legajoService.rubroNombre}} / {{legajoService.tipoDoc.TipoDocDefinicion[0].Descripcion}} </li>
+
+                </ol>
+            </nav>
+
+
+            <app-legajo-documentos> </app-legajo-documentos>
+
+            <app-documento-archivo></app-documento-archivo>
+            <app-documento-list></app-documento-list>
+
+
+
+        </div>
+        <div class="col-md-9" *ngIf="legajoService.formulario === 5">
+            <!-- columna de la main view -->
+            <app-matafuegos-abm></app-matafuegos-abm>
+        </div>
+
     </div>
- 
-  </div>
 </div>
