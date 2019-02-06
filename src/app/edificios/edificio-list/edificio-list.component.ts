@@ -57,7 +57,7 @@ export class EdificioListComponent implements OnInit {
            this.edificioService.getLista();
 
          } else {
-           this.mensajesService.error(JSON.parse(res).Status[0].Msg, 'Matafuego');
+           this.mensajesService.error(JSON.parse(res).Status[0].Msg, 'Edificio');
            this.edificioService._mostrarErrores(JSON.parse(res).Mensajes);
          }
         },

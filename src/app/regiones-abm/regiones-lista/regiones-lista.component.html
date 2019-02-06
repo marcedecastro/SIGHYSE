@@ -15,6 +15,7 @@
 -->
 <div *ngIf="regionService.listaVisible">  
     <div class="row">  
+
       <!--<div class="col-md-12"> <h6 class="text-center bg-secondary text-white"> Regions </h6> </div> -->
       <div class="col-1 offset-md-10">
         <a class="btn btn-outline-secondary btn-sm " (click)="showNew()">
@@ -31,6 +32,7 @@
               <Th *ngFor="let titulo of regionService.titulos ; let i = index">{{titulo}}</Th>   
             </tr>
           </thead>
+
           <tbody>
             <tr *ngFor="let Region of regionService.Lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
 
@@ -47,7 +49,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+   </div>
   </div>
 </div>
 

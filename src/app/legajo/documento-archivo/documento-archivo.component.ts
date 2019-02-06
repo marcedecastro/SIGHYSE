@@ -17,7 +17,7 @@ export class DocumentoArchivoComponent implements OnInit {
   archivos: Archivo[] = [];
   archivosStr = '';
   private modalRef: BsModalRef;
-constructor(private legajoService: LegajoService,  private modalService: BsModalService, private mensajesService: ToastrService ) { }
+constructor(public legajoService: LegajoService,  private modalService: BsModalService, private mensajesService: ToastrService ) { }
 
 ngOnInit() {
 }

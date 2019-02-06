@@ -18,7 +18,7 @@ export class GrillaComponent implements OnInit, OnChanges {
   public detalleMostrar = {'datos': [], 'titulos': [], titulosGlobales: []};
 
   constructor( private excelService: ExcelService,
-    private impService: ImpresionService,
+    public impService: ImpresionService,
     private modalService: BsModalService,
     private ds: DatosService ) { }
 
@@ -38,7 +38,7 @@ export class GrillaComponent implements OnInit, OnChanges {
 
        if (!elemento.subnivel) {
         const subnivel = Object.entries(elemento).filter(function(x) {
-          return Array.isArray(x[1] && xTit.indexOf( x[0]) === -1);
+          return (xTit.indexOf( x[0]) === -1) &&  Array.isArray(x[1]);
          });
          if (subnivel.length > 0) {
             elemento.subnivel = subnivel[0][1];
@@ -54,7 +54,6 @@ export class GrillaComponent implements OnInit, OnChanges {
     for (let i = 0; i < saltos.length; i++) {
       titulos.push(saltos[i].Lista);
     }
-
     return titulos;
   }
   setDetalle(elemento: any, subnivel: any) {
@@ -66,36 +65,33 @@ export class GrillaComponent implements OnInit, OnChanges {
     const xCampos = [];
     const xxTitulos = Object.entries(titulos);
     const xxCampos = Object.entries(objeto);
-    const xTit = this.getColumnasSaltos(this.titulosSaltos);
     let indiceCampo: number;
     let campos = [];
 
     campos = Object.keys(objeto);
- 
 
     for (let i = 0; i < xxTitulos.length; i++) {
       indiceCampo = campos.indexOf(xxTitulos[i][0]);
         if ( indiceCampo >= 0 && ! Array.isArray(xxCampos[indiceCampo][1]))  {
           xTitulos.push(xxTitulos[i][1]);
-          xCampos.push({'nombre': campos[indiceCampo], 
+          xCampos.push({'nombre': campos[indiceCampo],
           'detalle': this.titulosSaltos.filter(x => x.Columna === campos[indiceCampo])});
         }
       }
-
-
 
     return  {'titulos': xTitulos, 'campos': xCampos};
 
   }
 
-    mostrarDetalle(elemento: any, detalle: any, titulo: string, template: TemplateRef<any>) {
+    mostrarDetalle(elemento: any, detalle: any, xTitulo: string, template: TemplateRef<any>) {
+      const initialState = {titulo: xTitulo};
       this.ds.getDatosDet(detalle[0].Entidad,
         detalle[0].Accion,
         'LegajoConsulta', [{'Lista': Object.entries(elemento).filter(x => x[0] === detalle[0].Lista)[0][1]}
       ]).subscribe(
         res => { this.detalleMostrar.datos =  JSON.parse(res).Datos;
         this.detalleMostrar.titulosGlobales = JSON.parse(res).Titulos[0] ;
-        this.modalRef = this.modalService.show( template,  Object.assign({}, { class: 'modal-dialog modal-lg' })); }
+        this.modalRef = this.modalService.show( template, Object.assign({}, { class: 'modal-dialog modal-lg', initialState })); }
       );
 
     }

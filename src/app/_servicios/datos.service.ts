@@ -134,6 +134,12 @@ export class DatosService {
 
           return this._post( 'LegajosResumen', 'Emite', 'Infolegajo', this.edificioId, Datos);
        }
+       case 'PersonasRubrosLista': {
+
+        return this._post( 'Personas', 'ListaRubro', 'Administracion', this.edificioId, Datos);
+     }
+
+
       }
     }
   

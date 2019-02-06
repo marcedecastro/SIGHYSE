@@ -33,7 +33,6 @@ export class LegajoInformeComponent implements OnInit {
     this.dpkConf = Object.assign({}, config);
     this.bsLs.use('es');
   }
-  @Output() xdatos: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
     this.filtros = true;
@@ -82,7 +81,7 @@ export class LegajoInformeComponent implements OnInit {
   }
 
   getDatos( ) {
-    const  Datos = [{'FormatoSalida': 1, 'Edificios':  this.edificiosSeleccionados.length === 0 ? 'Todos' : this.edificiosSeleccionados,
+    const  Datos = [{'FormatoSalida': 0, 'Edificios':  this.edificiosSeleccionados.length === 0 ? 'Todos' : this.edificiosSeleccionados,
                   'Rubros':   this.rubrosSeleccionados.length === 0 ? 'Todos' : this.rubrosSeleccionados,
                   'FechaDesde':  this.fechaDesde ? this.fechaDesde.toLocaleDateString() : '01/01/1950',
                   'FechaHasta': this.fechaHasta ? this.fechaHasta.toLocaleDateString() : '31/12/2050'
@@ -90,7 +89,6 @@ export class LegajoInformeComponent implements OnInit {
     this.ds.getDatos('legajoInforme', Datos).subscribe( ped => {
       if (JSON.parse(ped).Status[0].Status  === 0) {
         this.datos = JSON.parse(ped).Datos;
-        this.xdatos.emit(this.datos);
          this.titulos = JSON.parse(ped).Titulos[0];
          this.titulosSaltos = JSON.parse(ped).TitulosSaltos;
          this.filtros = false;
