@@ -71,8 +71,7 @@
             </div>
 
             <div class="d-inline-block  align-content-end col pull-right">
-                <select #edificio (change)="this.cambiarEdificio(edificio.value)" class="form-control col-md-2 align-content-lg-end" searchable="Busque su Edificio">
-                   
+                <select #edificio (change)="this.cambiarEdificio(edificio.value)" class="form-control col-md-3 align-content-lg-end float-right" searchable="Busque su Edificio">
                     <option *ngFor="let edif of menuService.edificios" [value]="edif.EdificioId">
                       {{edif.Nombre}} </option>
                 </select>

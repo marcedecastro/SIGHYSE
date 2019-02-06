@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
-
 import { ToastrService} from 'ngx-toastr';
 import { DatosService } from '../../_servicios/datos.service';
 import {Provincia } from '../../_Modelos/provincia';
@@ -28,7 +26,7 @@ export class EdificioComponent implements OnInit {
         this.regiones = JSON.parse(res).Datos);
     this.ds.getDatos('EdificioPropiedades').subscribe(res =>
           this.edificioPropiedades = JSON.parse(res).Datos);
-          
+ 
        // this.resetForm();
   }
 

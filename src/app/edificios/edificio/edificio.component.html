@@ -19,14 +19,13 @@
             </div>
             <div class="form-group col-md-3">
                 <label>Código Postal </label>
-                <input class="form-control form-control-sm" name="CodPostal" #CodPostal="ngModel" [(ngModel)]="edificioService.instancia.Codpostal" placeholder="Codigo Postal">
+                <input class="form-control form-control-sm" name="Codpostal" #Codpostal="ngModel" [(ngModel)]="edificioService.instancia.Codpostal" placeholder="Código Postal">
             </div>
-
             <div class="form-group col-md-1">
                 <label>Estado </label>
                 <!--   <input type="checkbox" class="form-control form-control-sm" name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" placeholder="Estado">-->
                 <label class="chk-container"> 
-                <input type="checkbox"  name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" required>
+                <input class="form-control form-control-sm" type="checkbox" name="Estado" #Estado="ngModel" [(ngModel)]="edificioService.instancia.Estado" required>
                   <span class="checkmark"></span>
                 </label>
             </div>
@@ -37,9 +36,9 @@
             <div class="form-group col-md-4">
                 <label>Región </label>
                 <select class="form-control  form-control-sm" name="Region" #Region="ngModel" [(ngModel)]="edificioService.instancia.Region" aria-placeholder="Regiones" required>
-               <option *ngFor="let region of regiones" [value]="region.Region">
-                {{region.Nombre}}</option>
-            </select>
+                    <option *ngFor="let region of regiones" [value]="region.Region">
+                         {{region.Nombre}}</option>
+                 </select>
             </div>
 
             <div class="form-group col-md-4">
@@ -108,5 +107,7 @@
           <i class="fa fa-repeat"></i> Cancelar</button>
             </div>
         </div>
+        <p>Formulario invalido {{edificioForm.invalid}}
+        </p>
     </form>
 </div>

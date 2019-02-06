@@ -26,7 +26,7 @@
 <!-- ============= Templates ==================-->
 <!-- Tabla Maestro-->
 <ng-template #tabla let-nivel='nivel' let-titulos='titulos'  >
-    <div *ngIf="titulos && nivel">
+
     <div *ngIf="getTitulosNivel(nivel, titulos)"> 
     <table class="table table-sm  table-hover">
         <thead>
@@ -39,14 +39,15 @@
     
         <tbody>
 
-            <ng-container  *ngFor="let elemento of nivel; let i = index" [ngTemplateOutlet]="item"
-            [ngTemplateOutletContext]="{elemento:elemento, campos:nivel.titulos.campos,subnivel: setNivel2(elemento), titulos: nivel.titulos.titulos}">
+            <ng-container  *ngFor="let elemento of nivel; let i = index"
+                [ngTemplateOutlet]="item"
+                [ngTemplateOutletContext]="{elemento:elemento, campos:nivel.titulos.campos,subnivel: setNivel2(elemento), titulos: nivel.titulos.titulos}">
             </ng-container>
 
         </tbody>
         </table>
     </div>
-    </div>
+
 </ng-template>
 
 <!-- Tabla Detalle-->
@@ -76,30 +77,25 @@
     </tr>
 </ng-template>|
 
-<ng-template #detTempalte let-titulo='titulo' role="dialog">
-    <div class="modal-content">
-
+<ng-template #detTempalte  role="dialog">
+    <div *ngIf='detalleMostrar.datos.length > 0'>
+        <div class="modal-content">
             <div class="modal-header">
-                       <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarDetalle()">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                <h5> {{ modalService.config.initialState.titulo }}</h5>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarDetalle()">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-    
-
             <div class="modal-body">
-
-                    <div class="table table-responsive "  >
-                        <ng-container  
-                            [ngTemplateOutlet]="tabla"
-                            [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales}">
-                        </ng-container>          
-                    </div>
-
-                    
+                <div class=" table-responsive "  >
+                    <ng-container  
+                        [ngTemplateOutlet]="tabla"
+                        [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales}">
+                    </ng-container>          
+                </div>                     
             </div>
-    
+        </div>
     </div>
-
     
 </ng-template>        
       

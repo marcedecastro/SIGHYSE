@@ -67,6 +67,11 @@ import { RegionesListaComponent } from './regiones-abm/regiones-lista/regiones-l
 import { RegionDatosComponent } from './regiones-abm/region-datos/region-datos.component';
 import { ImpresionComponent } from './impresion/impresion.component';
 import { GrillaImpresionComponent } from './_componentes/grilla/grilla-impresion/grilla-impresion.component';
+import { AbmComponent } from './_componentes/abm/abm.component';
+import { AbmListaComponent } from './_componentes/abm/abm-lista/abm-lista.component';
+import { AbmFormComponent } from './_componentes/abm/abm-form/abm-form.component';
+import { PersonasAbmComponent } from './personas-abm/personas-abm.component';
+
 
 
 
@@ -117,6 +122,11 @@ defineLocale('es', esLocale);
     RegionDatosComponent,
     ImpresionComponent,
     GrillaImpresionComponent,
+    AbmComponent,
+    AbmListaComponent,
+    AbmFormComponent,
+    PersonasAbmComponent,
+
 
   ],
   imports: [
@@ -138,4 +148,3 @@ defineLocale('es', esLocale);
   bootstrap: [AppComponent]
 })
 export class AppModule { }
- 
