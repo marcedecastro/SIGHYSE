@@ -18,6 +18,7 @@ export class PersonasAbmComponent implements OnInit {
   constructor(private ds: DatosService, private ls: LegajoService, private mensajesService: ToastrService) { }
 
   ngOnInit() {
+   
     const xDatos = [
       {'EdificioId': this.ds.edificioId,
       'RubroId': this.ls.getTipoDoc().RubroId,
