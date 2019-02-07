@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-sm  table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2">
+                            <div>
+
+                                <button type="button" class="btn btn-info btn-xs" (click)="showNew()">Nuevo Elemento <i class= "fa fa-plus-circle"></i> </button>
+                            </div>
+                        </th>
+                        <th> </th>
+                        <!-- lista de titulos-->
+                        <Th *ngFor="let titulo of titulos.titulos ; let i = index">{{titulo}}</Th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let objeto of lista ; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+
+                        <td>
+                            <a class="btn" (click)="editar(objeto)"> <i class="fa fa-pencil-square-o"></i> </a>
+                        </td>
+                        <td>
+                            <a class="btn text-danger" (click)="onDelete(objeto,template)"> <i class="fa fa-trash-o"></i> </a>
+                        </td>
+                        <!--  campos de la fila-->
+                        <td *ngFor="let campo of titulos.campos"> {{objeto[campo.nombre]}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

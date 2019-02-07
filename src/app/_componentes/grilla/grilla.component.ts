@@ -4,6 +4,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import {DatosService} from './../../_servicios/datos.service';
 import {ExcelService} from './../../_servicios/excel.service';
 import {ImpresionService} from './../../_servicios/impresion.service';
+import {getTitulos, getColumnasSaltos} from './../../_funciones/funciones';
 @Component({
   selector: 'app-grilla',
   templateUrl: './grilla.component.html',
@@ -29,12 +30,12 @@ export class GrillaComponent implements OnInit, OnChanges {
   getTitulosNivel(nivel, titulos?) {
     if (!titulos) {titulos = this.titulos; }
 
-    nivel.titulos = this.getTitulos(nivel[0], titulos);
+    nivel.titulos = getTitulos(nivel[0], titulos, this.titulosSaltos);
     return nivel.titulos.titulos.length > 0;
   }
 
   setNivel2(elemento: any) {
-        const xTit = this.getColumnasSaltos(this.titulosSaltos);
+        const xTit = getColumnasSaltos(this.titulosSaltos);
 
        if (!elemento.subnivel) {
         const subnivel = Object.entries(elemento).filter(function(x) {
@@ -47,42 +48,9 @@ export class GrillaComponent implements OnInit, OnChanges {
       }
     return elemento.subnivel;
   }
-
-  getColumnasSaltos(saltos): string[] {
-    let titulos: string[];
-    titulos = [];
-    for (let i = 0; i < saltos.length; i++) {
-      titulos.push(saltos[i].Lista);
-    }
-    return titulos;
-  }
   setDetalle(elemento: any, subnivel: any) {
     elemento.detalle = !elemento.detalle;
   }
-
-  getTitulos( objeto: any, titulos: string[]): any {
-    const xTitulos = [];
-    const xCampos = [];
-    const xxTitulos = Object.entries(titulos);
-    const xxCampos = Object.entries(objeto);
-    let indiceCampo: number;
-    let campos = [];
-
-    campos = Object.keys(objeto);
-
-    for (let i = 0; i < xxTitulos.length; i++) {
-      indiceCampo = campos.indexOf(xxTitulos[i][0]);
-        if ( indiceCampo >= 0 && ! Array.isArray(xxCampos[indiceCampo][1]))  {
-          xTitulos.push(xxTitulos[i][1]);
-          xCampos.push({'nombre': campos[indiceCampo],
-          'detalle': this.titulosSaltos.filter(x => x.Columna === campos[indiceCampo])});
-        }
-      }
-
-    return  {'titulos': xTitulos, 'campos': xCampos};
-
-  }
-
     mostrarDetalle(elemento: any, detalle: any, xTitulo: string, template: TemplateRef<any>) {
       const initialState = {titulo: xTitulo};
       this.ds.getDatosDet(detalle[0].Entidad,
