@@ -16,6 +16,7 @@ export class DocumentoArchivoComponent implements OnInit {
   archivo = new Archivo();
   archivos: Archivo[] = [];
   archivosStr = '';
+  archivoIndice: number;
   private modalRef: BsModalRef;
 constructor(public legajoService: LegajoService,  private modalService: BsModalService, private mensajesService: ToastrService ) { }
 
@@ -39,12 +40,14 @@ onFileChanged(files: FileList ) {
 }
 
 
-onDelete(archivo: Archivo, template: TemplateRef<any>) {
+onDelete(archivo: Archivo, indice: number, template: TemplateRef<any>) {
 
   this.archivo = archivo;
+  this.archivoIndice = indice;
+ //  this.legajoService.instancia.DocumentoId = archivo;
   this.modalRef = this.modalService.show(
     template,
-    Object.assign({}, { class: 'gray modal-sm' })
+    Object.assign({}, { class: 'gray modal-sm' }) 
   );
 }
 
@@ -55,10 +58,12 @@ confirm(): void {
    this.archivo.RubroId = this.legajoService.instancia.RubroId;
    this.archivo.TipoDoc = this.legajoService.instancia.TipoDoc;
    this.archivo.Renglon = this.legajoService.instancia.Renglon;
-   this.archivo.DocumentoId = this.legajoService.instancia.DocumentoId;
+ //  this.archivo.DocumentoId = this.legajoService.instancia.DocumentoId;
    this.legajoService.grabaArchivo (this.archivo, 'GrabaBaja').subscribe( ped => {
     if (JSON.parse(ped).Status[0].Status  === 0) {
-       this.mensajesService.success('archivo' + JSON.parse(ped).Datos[0].NombreArchivo + ' eliminado sactifactoriamente');
+     // alert(this.legajoService.instancia.LegajoId);
+      this.legajoService.instancia.DocumentosArchivos.splice(this.archivoIndice, 1);
+       this.mensajesService.success('archivo ' + this.archivo.NombreArchivo + ' eliminado sactifactoriamente');
       // this.getDocumentos('Documento');
       } else {
          this.mensajesService.error('Error al obtener archivo : ' + JSON.parse(ped).Status[0].Msg);
@@ -66,6 +71,7 @@ confirm(): void {
     });
 
  }
+
 
  decline(): void {
 // this.message = 'Declined!';

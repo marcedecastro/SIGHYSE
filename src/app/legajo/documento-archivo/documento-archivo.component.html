@@ -31,7 +31,7 @@
       </thead>
       <tbody >
 
-          <tr *ngFor="let archivo of legajoService.instancia.DocumentosArchivos">
+          <tr *ngFor="let archivo of legajoService.instancia.DocumentosArchivos; let i = index">
             <td>{{archivo.NombreArchivo }}</td>
             <td>{{archivo.TipoArchivo}}</td>
 
@@ -41,7 +41,7 @@
                   </a>
                 </td>
             <td>
-              <a class="btn text-danger" (click)="onDelete(archivo,template)">
+              <a class="btn text-danger" (click)="onDelete(archivo, i,template)">
                 <i class="fa fa-trash-o"></i>
               </a>
             </td>

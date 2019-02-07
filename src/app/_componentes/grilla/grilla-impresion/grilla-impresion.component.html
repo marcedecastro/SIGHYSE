@@ -1,0 +1,22 @@
+<div *ngIf="datos"> 
+    <table class="table table-sm  table-hover">
+      <thead>
+        <tr > 
+            <Th  *ngFor="let titulo of datos.titulos.titulos ; let i = index">{{titulo}}</Th> 
+          </tr>
+      </thead>
+    
+        <tbody>
+            <ng-container  *ngFor="let elemento of datos.datos; let i = index" [ngTemplateOutlet]="item"
+            [ngTemplateOutletContext]="{elemento:elemento, campos:datos.titulos.campos}">
+            </ng-container>
+
+        </tbody>
+        </table>
+</div>
+<!-- Tabla Detalle-->
+<ng-template #item let-elemento='elemento' let-campos='campos' >
+    <tr>        
+        <td *ngFor="let campo of campos "> {{elemento[campo.nombre]}}</td>                   
+    </tr>
+</ng-template>
