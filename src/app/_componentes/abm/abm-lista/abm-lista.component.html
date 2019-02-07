@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="titulos">
     <div class="col-md-12">
         <div class="table-responsive">
             <table class="table table-sm  table-hover">
@@ -10,7 +10,7 @@
                                 <button type="button" class="btn btn-info btn-xs" (click)="showNew()">Nuevo Elemento <i class= "fa fa-plus-circle"></i> </button>
                             </div>
                         </th>
-                        <th> </th>
+
                         <!-- lista de titulos-->
                         <Th *ngFor="let titulo of titulos.titulos ; let i = index">{{titulo}}</Th>
                     </tr>
